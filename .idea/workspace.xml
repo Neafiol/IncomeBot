@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a79afcd7-1b78-4aee-a217-72702c4e059a" name="Default Changelist" comment="" />
+    <list default="true" id="a79afcd7-1b78-4aee-a217-72702c4e059a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bot/TextConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bot/TextConstants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bot/telsent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bot/telsent.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +15,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/IncomeBot$models.coverage" NAME="models Coverage Results" MODIFIED="1560956197739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IncomeBot$Test.coverage" NAME="Test Coverage Results" MODIFIED="1560957823899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/IncomeBot$telsent.coverage" NAME="telsent Coverage Results" MODIFIED="1560961355521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
+    <SUITE FILE_PATH="coverage/IncomeBot$telsent.coverage" NAME="telsent Coverage Results" MODIFIED="1560964486738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
   </component>
   <component name="FileEditorManager">
     <leaf>
@@ -30,41 +34,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+            <state relative-caret-position="68">
+              <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
               <folding>
-                <element signature="e#229#239#0" />
-                <element signature="e#1579#1730#0" />
-                <element signature="e#4153#4683#0" />
-                <element signature="e#4227#4497#0" />
-                <element signature="e#4516#4683#0" />
-                <element signature="e#2765#3499#0" />
-                <element signature="e#3248#3883#0" />
-                <element signature="e#3939#4668#0" />
-                <element signature="e#4745#6379#0" />
-                <element signature="e#5300#5400#0" />
-                <element signature="e#5455#5563#0" />
-                <element signature="e#5612#5722#0" />
-                <element signature="e#6023#6646#0" />
-                <element signature="e#6711#7686#0" />
-                <element signature="e#7738#7853#0" />
-                <element signature="e#8493#8783#0" />
-                <element signature="e#10246#10350#0" />
-                <element signature="e#10596#10771#0" />
-                <element signature="e#7946#7996#0" />
-                <element signature="e#8017#8067#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#24#34#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +46,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="9" selection-start-line="7" selection-end-line="7" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="9" column="14" selection-start-line="9" selection-end-line="9" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,6 +88,9 @@
       <find>where</find>
     </findStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -120,6 +108,7 @@
     <option name="width" value="1280" />
     <option name="height" value="680" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -136,17 +125,6 @@
               <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
               <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
               <item name="Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="photos" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -259,12 +237,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560935004808</updated>
-      <workItem from="1560935006356" duration="25262000" />
+      <workItem from="1560935006356" duration="28628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25262000" />
+    <option name="totallyTimeSpent" value="28628000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -324,23 +302,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="9" selection-start-line="7" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -351,31 +312,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="14" selection-start-line="9" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="58" column="23" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
+        <state relative-caret-position="68">
+          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
           <folding>
-            <element signature="e#229#239#0" />
-            <element signature="e#1579#1730#0" />
-            <element signature="e#4153#4683#0" />
-            <element signature="e#4227#4497#0" />
-            <element signature="e#4516#4683#0" />
-            <element signature="e#2765#3499#0" />
-            <element signature="e#3248#3883#0" />
-            <element signature="e#3939#4668#0" />
-            <element signature="e#4745#6379#0" />
-            <element signature="e#5300#5400#0" />
-            <element signature="e#5455#5563#0" />
-            <element signature="e#5612#5722#0" />
-            <element signature="e#6023#6646#0" />
-            <element signature="e#6711#7686#0" />
-            <element signature="e#7738#7853#0" />
-            <element signature="e#8493#8783#0" />
-            <element signature="e#10246#10350#0" />
-            <element signature="e#10596#10771#0" />
-            <element signature="e#7946#7996#0" />
-            <element signature="e#8017#8067#0" />
+            <element signature="e#24#34#0" expanded="true" />
           </folding>
         </state>
       </provider>

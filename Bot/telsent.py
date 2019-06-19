@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import random
 import sys
 from datetime import datetime
 
-from playhouse.shortcuts import model_to_dict
-
-from Bot.TextConstants import BTN_1_TEXT, BTN_2_TEXT, BTN_3_TEXT, HELLO_TEXT, COUNTRIES, FIRST_TEXT, RULE_TEXT
+from Bot.TextConstants import *
 
 sys.path.append('../')
 
@@ -34,7 +31,7 @@ def handle_docs_photo(message):
     u = Users.get(Users.tel_id == message.chat.id)
     if u.dstage == 0:
         bot.send_message(chat_id=message.chat.id,
-                         text="Я не отвечаю на сообщения")
+                         text=I_NOT_RESPONSE)
         return
     file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
 
@@ -52,7 +49,7 @@ def handle_docs_photo(message):
         order.save()
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
-                         text="Информация обновлена, дождитесь проверки модератором")
+                         text=INFO_UPLOAD)
     if u.dstage == 5:
         order = Order.get_by_id(u.active_order)
         order.other_data["Order Photo"] = photo_name
@@ -60,7 +57,7 @@ def handle_docs_photo(message):
         order.save()
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
-                         text="Информация обновлена, дождитесь проверки модератором")
+                         text=INFO_UPLOAD)
 
 
 # Comand for enter in bot
@@ -82,7 +79,7 @@ def repeat_all_messages(message):  # Название функции не игр
         bot.send_message(message.chat.id, FIRST_TEXT)
     else:
         print(u.tel_id)
-        bot.send_message(message.chat.id, "Вы уже с нами.", reply_markup=base_keyboard)
+        bot.send_message(message.chat.id, YOU_THERE_TEXT, reply_markup=base_keyboard)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -104,7 +101,7 @@ def repeat_all_messages(call):
 
             bot.edit_message_text(chat_id=call.message.chat.id,
                                   message_id=call.message.message_id,
-                                  text="Теперь выберете магазин, в котором хотите работать",
+                                  text=SHOP_CHOICE,
                                   reply_markup=markup
                                   )
 
@@ -121,7 +118,7 @@ def repeat_all_messages(call):
 
             bot.edit_message_text(chat_id=call.message.chat.id,
                                   message_id=call.message.message_id,
-                                  text="Теперь выберете товар, который хотите купить",
+                                  text=FAVOURITE_ITEM,
                                   reply_markup=markup)
 
         elif (cal.find("item") >= 0):
@@ -130,8 +127,8 @@ def repeat_all_messages(call):
 
             item = Items.get(Items.id == item)
 
-            markup.add(types.InlineKeyboardButton(text="Отменить", callback_data="drop" + str(item.id)))
-            markup.add(types.InlineKeyboardButton(text="Купил", callback_data="buy_" + str(item.id)))
+            markup.add(types.InlineKeyboardButton(text=CANSLE, callback_data="drop" + str(item.id)))
+            markup.add(types.InlineKeyboardButton(text=BOUGTH, callback_data="buy_" + str(item.id)))
             markup.add(types.InlineKeyboardButton(text="Открыть сайт", url=str(item.url)))
 
             bot.send_message(chat_id=call.message.chat.id,
@@ -148,7 +145,7 @@ def repeat_all_messages(call):
             u.save()
 
             bot.send_message(chat_id=call.message.chat.id,
-                             text="Введите название товара",
+                             text=ITEM_NAME,
                              parse_mode="Markdown")
 
         elif cal.find("orderstatus") >= 0:
@@ -207,7 +204,7 @@ def repeat_all_messages(call):
 
             bot.edit_message_text(chat_id=call.message.chat.id,
                                   message_id=call.message.message_id,
-                                  text="Ваши заказы:",
+                                  text=YOUR_ORDER,
                                   reply_markup=markup)
 
         elif (cal.find("order") >= 0):
@@ -217,14 +214,14 @@ def repeat_all_messages(call):
 
             order = Order.get(Order.id == order)
 
-            markup.add(types.InlineKeyboardButton(text="Не пришло и не придет",
+            markup.add(types.InlineKeyboardButton(text=COME_AWAY,
                                                   callback_data="orderstatus_drop_" + str(order.id)))
             markup.add(
-                types.InlineKeyboardButton(text="Пришло дропу в ЕС", callback_data="orderstatus_toes_" + str(order.id)))
-            markup.add(types.InlineKeyboardButton(text="Пришло пересыльщику",
+                types.InlineKeyboardButton(text=COME_TO_DROP, callback_data="orderstatus_toes_" + str(order.id)))
+            markup.add(types.InlineKeyboardButton(text=COME_RESEND,
                                                   callback_data="orderstatus_todrop_" + str(order.id)))
             markup.add(
-                types.InlineKeyboardButton(text="Пришло в Россию", callback_data="orderstatus_torus_" + str(order.id)))
+                types.InlineKeyboardButton(text=COME_TO_RUS, callback_data="orderstatus_torus_" + str(order.id)))
 
             bot.send_message(chat_id=call.message.chat.id,
                              text="Заказ на *" + order.name + "*\nПожалуйста, проставте статус товару после завершения покупки",
@@ -265,7 +262,7 @@ def repeat_all_messages(message):
         n = Order.select().where(Order.userid == u.id).count()
 
         keyboard = types.InlineKeyboardMarkup(row_width=2)
-        base_button_1 = types.InlineKeyboardButton(text="Мои заказы", callback_data="getorders")
+        base_button_1 = types.InlineKeyboardButton(text="Мои заказы ", callback_data="getorders")
         base_button_2 = types.InlineKeyboardButton(text="Добавить товар", callback_data="neworder")
         keyboard.add(base_button_1, base_button_2)
 
@@ -286,7 +283,7 @@ def repeat_all_messages(message):
             order.other_data["Drop Data"] = message.text
             u.dstage = 0
             bot.send_message(chat_id=message.chat.id,
-                             text="Информация обновлена, дождитесь проверки модератором")
+                             text="Информация обновлена, дождитесь проверки модератором 👤")
         elif u.dstage == 3:
             order.name = message.text
             u.dstage = 4
@@ -305,10 +302,10 @@ def repeat_all_messages(message):
 
 # Main Fanction
 if __name__ == '__main__':
-    # bot.send_message(445330281, "123")
-    try:
-        print("start")
-        bot.polling(none_stop=True)
-    except:
-        print("Error")
-        bot.polling(none_stop=True)
+    while True:
+        try:
+            print("start")
+            bot.polling(none_stop=True)
+        except:
+            print("Error")
+            exit(0)
