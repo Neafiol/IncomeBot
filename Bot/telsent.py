@@ -19,11 +19,20 @@ def log(txt):
 
 bot = telebot.TeleBot(tel_token)
 base_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+base_keyboard1 = types.ReplyKeyboardMarkup(row_width=2,resize_keyboard=True)
 
 base_button_1 = types.KeyboardButton(text=BTN_1_TEXT)
 base_button_2 = types.KeyboardButton(text=BTN_2_TEXT)
 base_button_3 = types.KeyboardButton(text=BTN_3_TEXT)
-base_keyboard.row(base_button_1, base_button_2, base_button_3)
+base_button_4 = types.KeyboardButton(text=BTN_4_TEXT)
+base_keyboard.row(base_button_1, base_button_2)
+base_keyboard.row(base_button_3,base_button_4)
+
+base_button_1 = types.KeyboardButton(text=BTN_11_TEXT)
+base_button_2 = types.KeyboardButton(text=BTN_12_TEXT)
+base_button_3 = types.KeyboardButton(text=BTN_13_TEXT)
+base_button_4 = types.KeyboardButton(text=BTN_14_TEXT)
+base_keyboard1.add(base_button_1, base_button_2, base_button_3, base_button_4)
 
 
 @bot.message_handler(content_types=['photo'])
@@ -75,7 +84,9 @@ def repeat_all_messages(message):  # Название функции не игр
 
     u = Users.get_or_none(Users.tel_id == message.chat.id)
     if u == None:
-        Users.create(tel_id=message.chat.id, name=str(message.from_user.last_name), level=-1)
+        Users.create(tel_id=message.chat.id, name=str(message.from_user.last_name),
+                     nicname="Anonim",level=-1)
+
         bot.send_message(message.chat.id, FIRST_TEXT)
     else:
         print(u.tel_id)
@@ -137,8 +148,8 @@ def repeat_all_messages(call):
                              parse_mode="Markdown")
 
         elif (cal.find("neworder") >= 0):
-            u = Users.get(Users.tel_id==call.message.chat.id)
-            o = Order(url="",data=datetime.now(),userid=u.id,name="")
+            u = Users.get(Users.tel_id == call.message.chat.id)
+            o = Order(url="", data=datetime.now(), userid=u.id, name="")
             o.save()
             u.dstage = 3
             u.active_order = o.id
@@ -191,12 +202,12 @@ def repeat_all_messages(call):
                                   reply_markup=None,
                                   parse_mode="Markdown")
 
-        elif (cal.find("getorders") >= 0):
+        elif cal.find("getorders") >= 0:
 
             markup = types.InlineKeyboardMarkup(row_width=1)
             buttons = []
             u = Users.get(Users.tel_id == call.message.chat.id)
-            orders = Order.select().where(Order.userid == u.id and Order.status>=0).execute()
+            orders = Order.select().where(Order.userid == u.id and Order.status >= 0).execute()
 
             for o in orders:
                 buttons.append(types.InlineKeyboardButton(text=o.name, callback_data="order_" + str(o.id)))
@@ -206,6 +217,8 @@ def repeat_all_messages(call):
                                   message_id=call.message.message_id,
                                   text=YOUR_ORDER,
                                   reply_markup=markup)
+
+
 
         elif (cal.find("order") >= 0):
             print(cal)
@@ -224,7 +237,8 @@ def repeat_all_messages(call):
                 types.InlineKeyboardButton(text=COME_TO_RUS, callback_data="orderstatus_torus_" + str(order.id)))
 
             bot.send_message(chat_id=call.message.chat.id,
-                             text="Заказ на *" + order.name + "*\nПожалуйста, проставте статус товару после завершения покупки",
+                             text="Заказ на *" + order.name + "*\nПожалуйста, проставьте статус товару после "
+                                                              "завершения покупки",
                              reply_markup=markup,
                              parse_mode="Markdown")
 
@@ -239,14 +253,30 @@ def repeat_all_messages(call):
 # обработка ответа от участника
 def repeat_all_messages(message):
     if message.text == BTN_1_TEXT:
-        markup = types.InlineKeyboardMarkup(row_width=2)
-        buttons = []
-        buttons.append(types.InlineKeyboardButton(text="Хочу присоеденитьмся", callback_data="wantadd"))
-        markup.add(*buttons)
+        bot.send_message(message.chat.id, O_SERVICE_TEXT, reply_markup=base_keyboard1)
 
-        bot.send_message(message.chat.id, RULE_TEXT, reply_markup=markup)
+    elif message.text == BTN_11_TEXT:
+        bot.send_message(message.chat.id, RULE_TEXT, parse_mode="Markdown")
 
-    if (message.text == BTN_3_TEXT):
+    elif message.text == BTN_12_TEXT:
+        text = "*Топ участников, набравших больше всего балов:*\n\n"
+        users = Users.select().order_by(Users.balls.desc() ).limit(20).execute()
+
+        for i,u in enumerate(users):
+            spase=45-len(str(u.balls)) - len(str(u.nicname)) - len(str(i))
+            text +="*"+str(i+1)+"*. " + str(u.nicname) +" "*spase +  "_" + str(u.balls) + "_\n"
+
+        bot.send_message(chat_id=message.chat.id,
+                         text=text,parse_mode="Markdown")
+
+    elif message.text == BTN_13_TEXT:
+        Users.update({Users.dstage: 6}).where(Users.tel_id == message.chat.id).execute()
+        bot.send_message(message.chat.id, "Пришлите ваш отзыв")
+
+    elif message.text == BTN_14_TEXT:
+        bot.send_message(message.chat.id, "Выбери действие", reply_markup=base_keyboard)
+
+    elif (message.text == BTN_3_TEXT):
         markup = types.InlineKeyboardMarkup(row_width=3)
         buttons = []
         for c in COUNTRIES:
@@ -265,16 +295,34 @@ def repeat_all_messages(message):
         base_button_1 = types.InlineKeyboardButton(text="Мои заказы ", callback_data="getorders")
         base_button_2 = types.InlineKeyboardButton(text="Добавить товар", callback_data="neworder")
         keyboard.add(base_button_1, base_button_2)
-
         bot.send_message(chat_id=message.chat.id,
                          text="На данный момент у вас " + str(n) + " активных заказов",
                          reply_markup=keyboard)
 
+    elif message.text == BTN_4_TEXT:
+        text = "*Доступные Вам адреса:*\n\n"
+        u = Users.get(Users.tel_id == message.chat.id)
+        adreses = Adress.select().where(Adress.minlevel <= u.level).execute()
+
+        for i,a in enumerate(adreses):
+            text += "*"+str(i+1)+"*. " + a.name + ":  _" + a.adress + "_\n\n"
+
+        bot.send_message(chat_id=message.chat.id,
+                         text=text,parse_mode="Markdown")
+
+
+
+
     else:
         u = Users.get(Users.tel_id == message.chat.id)
+        if u.dstage == 6:
+            pass
+            Comment.create(autor=u.name , text=message.text)
+            bot.send_message(chat_id=message.chat.id,
+                             text="Отзыв добавлен")
+            return
+
         order = Order.get_by_id(u.active_order)
-
-
         if u.dstage == 0:
             bot.send_message(chat_id=message.chat.id,
                              text="Я не отвечаю на сообщения")
@@ -283,17 +331,18 @@ def repeat_all_messages(message):
             order.other_data["Drop Data"] = message.text
             u.dstage = 0
             bot.send_message(chat_id=message.chat.id,
-                             text="Информация обновлена, дождитесь проверки модератором 👤")
+                             text=WAIT_MODERATOR)
         elif u.dstage == 3:
             order.name = message.text
             u.dstage = 4
             bot.send_message(chat_id=message.chat.id,
-                             text="Пришлите ссылку на товар")
+                             text=SEND_ORDER_URL)
         elif u.dstage == 4:
             order.url = message.text
             u.dstage = 5
             bot.send_message(chat_id=message.chat.id,
                              text="Пришлите скриншот с ордером")
+
         u.save()
         order.save()
 
