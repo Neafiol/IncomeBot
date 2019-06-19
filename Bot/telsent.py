@@ -320,6 +320,8 @@ def repeat_all_messages(message):
             Comment.create(autor=u.name , text=message.text)
             bot.send_message(chat_id=message.chat.id,
                              text="Отзыв добавлен")
+            u.dstage=0
+            u.save()
             return
 
         order = Order.get_by_id(u.active_order)
