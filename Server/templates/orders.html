@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)/ -->
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://im0-tub-ru.yandex.net/i?id=fbe2cb74572414c533ee7de18c3af3da&n=13"
+          type="image/x-icon">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/jquery-1.11.3.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    {#    <script src="/js/bootstrap.min.js"></script>#}
+    {#    <script src="/js/jquery.confirm.min.js"></script>#}
+    {#    <script src="/js/run_prettify.js"></script>#}
+
+
+</head>
+
+<body>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link " href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/shops">Shops</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="/items/1">Items</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="/users">Users</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/orders">Orders</a>
+    </li>
+</ul>
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+
+    <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto">Уведомление</strong>
+            <small>0 mins ago</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" id="alerttext">
+            Hello, world! This is a toast message.
+        </div>
+    </div>
+</div>
+
+
+<div class="container body">
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Тип сортировки
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/orders/all">Все</a>
+            </div>
+        </div>
+
+    </div>
+
+    {% for o in orders %}
+        <div class="row order">
+            <div class="card ">
+                <h5 class="card-header"><a href="{{ o.url }}">{{ o.name }}</a></h5>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card-body ">
+                            <h5 class="card-title">Автор: {{ o.userid }}</h5>
+
+                            <form>
+                                <input type="hidden" name="id" value="{{ o.id }}">
+                                <input type="hidden" name="cmd" value="update_order">
+                                <div class="form-group">
+                                    <select class="form-control"
+                                            value="{{ o.status }}" name="status">
+                                        <option class="dropdown-item"
+                                                value="1">На модерации
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="2">В пути
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="3">Доставлен дропу
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="4">Едет в Россию
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="4">Получен
+                                        </option>
+                                        <option class="dropdown-item" style="background-color: darkred"
+                                                value="del">Удален
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="Обновить">
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
+                             class="card-img orderphoto">
+                    </div>
+                    <div class="col-lg-3">
+                        <a target="_blank"
+                           href="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig">
+                            <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
+                                 alt="О получении"
+                                 class="card-img orderphoto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a target="_blank"
+                           href="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig">
+                            <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
+                                 alt="О получении"
+                                 class="card-img orderphoto">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+</body>
+</html>

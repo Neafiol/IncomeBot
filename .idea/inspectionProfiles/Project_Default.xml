@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="Bot.telsent.TextConstants" />
+          <option value="Test.Crypto" />
         </list>
       </option>
     </inspection_tool>

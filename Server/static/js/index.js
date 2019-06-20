@@ -1,64 +1,20 @@
-$("#send_all").click(function () {
-    var data={
-        text : $("#in_message").val(),
-        action :'new_mes'
 
-    };
-
-
+$("form").submit(function (e) { // Устанавливаем событие отправки для формы с id=form
+    e.preventDefault();
+    var form_data = $(this).serialize(); // Собираем все данные из формы
     $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/com", // адрес, на который будет отправлен запрос
-        data: data, // новый контекст исполнения функции
-        success: function () { // если запрос успешен вызываем функцию
-            alert("Сообщение отправлено"); // добавлем текстовое содержимое в элемент с классом .myClass
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-});
-
-$("#new_shop").click(function () {
-    var data={
-        content : $("#new_shop").val(),
-        slat : $("#slat").val(),
-        slon : $("#slon").val(),
-        sname : $("#sname").val(),
-        action :'new_shop'
-    };
-
-
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/com", // адрес, на который будет отправлен запрос
-        data: data, // новый контекст исполнения функции
+        type: "POST", // Метод отправки
+        url: "/cmd", // Путь до php файла отправителя
+        data: form_data,
         success: function (data) { // если запрос успешен вызываем функцию
-            alert("Магазин добавлен"); // добавлем текстовое содержимое в элемент с классом .myClass
+            $("#alerttext").innerText=data;
+            $("#toast").toast("show");
+            // setTimeout(()=>$('#toast').toast("hide"),4000);
+            alert(data); // добавлем текстовое содержимое в элемент с классом .myClass
         },
         error: function (data) {
             alert(data.responseText);
         }
     });
-    return true;
 });
 
-$("#new_ask").click(function () {
-    var data=$('#quiz').serializeArray();
-
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/com", // адрес, на который будет отправлен запрос
-        data: data, // новый контекст исполнения функции
-        success: function (data) { // если запрос успешен вызываем функцию
-            alert(data.responseText);
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-    return true;
-});

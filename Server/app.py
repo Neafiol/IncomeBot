@@ -1,131 +1,109 @@
-from flask import Flask, send_from_directory, redirect, request, render_template, send_file
-from supf import *
+from flask import Flask, send_from_directory, request, render_template, redirect
+
+from models import Shops, Items, Adress, Users, Order
+
 app = Flask(__name__)
 
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    shops = Shops.select()
+    return render_template('index.html', shops=shops)
 
-@app.route('/com',methods=['POST'])
+
+@app.route('/cmd', methods=['POST'])
 def com():
-    c=request.values
+    c = request.form.to_dict()
+    comand = c["cmd"]
+    del c["cmd"]
+    print(c)
 
-    if (c['action']=="reg_lot"):
-        if len(Lotery.select().where(Lotery.ef_id==int(c['lid'])))>0:
-            return "Вы уже зарегестрированы"
-        try:
-            Lotery(ef_id=int(c['lid']),name=c['name'],
-                   secondname= c['secondname'],email=c['email'],phone=c['phone']).save()
-            send_to(c['lid'],regtext)
-            return "Вы зарегестрированы"
-        except Exception as e:
-            print(e)
-            return "Error"
+    if comand == "send_mes":
+        print("sent_message: " + c["message"])
 
-    if (c['action']=="new_mes"):
-        new_mes(c['text'])
-
-        return "Сообщения отправлены"
-
-    if (c['action']=="new_shop"):
-        new_shop(c['slat'],c['slon'],c['sname'])
+    elif comand == "new_shop":
+        Shops.create(**c)
         return "Магазин добавлен"
 
-    if (c['action']=="new_quiz"):
-        new_quiz(c['text'],c['qA']+';'+c['qB']+';'+c['qC']+';'+c['qD'])
-        return "Вопорс добавлен"
+    elif comand == "new_item":
+        c["cost"] = "100"
+        c["buycost"] = "50"
+        Items.create(**c)
+        return "Товар добавлен"
 
-    if (c['action']=="reddata"):
-        st=0
-        if(c['stut']=='good'):
-            st=1
-        if(c['stut']=='spam'):
-            Dset.get(Dset.name == c['name']).delete_instance()
-            return redirect('/datared')
+    elif comand == "new_adress":
+        Adress.create(**c)
+        return "Адресс добавлен"
 
-        Dset.update({Dset.stutus:st}).where(Dset.name==c['name'])
-        return redirect('/datared')
+    elif comand == "upload_shop":
+        Shops.update(c).where(Shops.id == c["id"]).execute()
+        return "Магазин обновлен"
 
-    if (c['action']=="del_quiz"):
-        Quiz.get(Quiz.id==c['qid']).delete_instance()
-        return redirect('/quizs')
-    print(c)
-    return redirect('/')
+    elif comand == "upload_user":
+        Users.update(c).where(Users.id == c["id"]).execute()
+        return "Пользователь обновлен"
+
+    elif comand == "update_order":
+        if(c["status"]=="del"):
+            Order.delete_by_id(c["id"])
+        else:
+            o = Order.get_by_id(c["id"])
+            o.status=c["status"]
+            o.save()
+
+        return "Статус заказа обновлен"
+
+    elif comand == "delete_user":
+        Users.delete_by_id(c["id"])
+        return redirect("/users")
+
+    return "OK"
+
 
 @app.route('/shops')
 def shops():
-    data=[]
-    for s in Shops.select():
-        blocs = []
+    shops = Shops.select().order_by(Shops.id).execute()
 
-        for i in Info.select().where(Info.shopname==s.name):
+    return render_template('shops.html', shops=shops)
 
-            d={'name':str(i.datatime),
-                'res':i.status
-                }
 
-            blocs.append(d)
-        print(blocs)
+@app.route('/items/<int:id>')
+def items(id=0):
+    print(id)
+    items = Items.select().where(Items.shopid == id).execute()
+    shops = Shops.select().execute()
 
-        dd={
-            'name':s.name,
-            'r':blocs,
-            'id':s.id
-        }
-        data.append(dd)
+    return render_template('items.html', items=items, shops=shops)
 
-    return render_template('shops.html',data=data)
 
-@app.route('/quizs')
+@app.route('/users')
 def quizs():
-    data=[]
-    for q in Quiz.select():
-        blocs=[]
-        for i in range(4):
-            d={'name':q.answers.split(';')[i],
-            'res':q.results.split(';')[i]
-               }
-            blocs.append(d)
-        dd={
-            'name':q.text,
-            'r':blocs,
-            'id':q.id
-        }
-        data.append(dd)
+    users = Users.select().execute()
+    return render_template('users.html', users=users)\
 
-
-    return render_template('quizs.html',data=data)
+@app.route('/orders')
+def orders():
+    orders = Order.select().execute()
+    return render_template('orders.html', orders=orders)
 
 
 @app.route('/', methods=['POST'])
 def upload_view():
-    file =  request.files['TEST']
+    file = request.files['TEST']
     print(file)
-    #file.save('ff.txt')
+    # file.save('ff.txt')
     pass
-
-@app.route('/users/<id>')
-def users(id):
-    top=Users.select().order_by(Users.balance).limit(25)
-
-    return render_template('user_page.html', top=top,id=id)
-
-@app.route('/datared')
-def datared():
-    d=Dset.select().where(Dset.stutus==-1).limit(25)
-    return render_template('datared.html',photos=d)
 
 
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('static/js', path)
+
+
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory('static/css', path)
-@app.route('/res/<path:path>')
-def send_res(path):
-    return send_from_directory('../res/',path)
+
 
 if __name__ == '__main__':
-    app.run(host=lhost,port=port,debug=False)
+    app.run(host='127.0.0.1', port=9000, debug=False)

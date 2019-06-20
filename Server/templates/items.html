@@ -41,13 +41,13 @@
         <a class="nav-link " href="/">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="/shops">Shops</a>
+        <a class="nav-link" href="/shops">Shops</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/items/1">Items</a>
+        <a class="nav-link active" href="/items/1">Items</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/users">Users</a>
+        <a class="nav-link " href="/users">Users</a>
     </li>
     <li class="nav-item">
         <a class="nav-link " href="/orders">Orders</a>
@@ -55,9 +55,25 @@
 </ul>
 
 
-<div class="container body">
+<div class="container body" >
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Выбирите магазин
+            </button>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for s in shops %}
+                    <a class="dropdown-item" href="/items/{{ s.id }}">{{ s.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
     <div class="row">
             <table class="table">
+
                 <thead>
                 <tr>
                     <th class="col-lg-3">Название</th>
@@ -66,11 +82,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for s in shops %}
+                {% for i in items %}
 
                     <tr>
                         <form>
-                            <td><h4 class="shopname">{{ s.name }}</h4></td>
+                            <td><h4 class="shopname">{{ i.name }}</h4></td>
                             <td>
                                 <input type="submit" style="width: 100%" class="btn btn-primary" value="Обновить">
                             </td>
@@ -80,7 +96,7 @@
                                     <div class="col-md-8">
                                         <label for="qname">Ссылка</label>
                                         <input id="qname" type="text"
-                                               value="{{ s.url }}"
+                                               value="{{ i.url }}"
                                                placeholder="https://amazon.com"
                                                class="form-control"
                                                name="url">
@@ -89,26 +105,24 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label>Название</label>
-                                        <input type="text" placeholder="Название" value="{{ s.name }}" name="name"
+                                        <input type="text" placeholder="Название" value="{{ i.name }}" name="name"
                                                class="form-control">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <input type="hidden" name="cmd" value="upload_shop">
-                                        <input type="hidden" name="id" value="{{ s.id }}">
+                                        <input type="hidden" name="cmd" value="upload_items">
+                                        <input type="hidden" name="id" value="{{ i.id }}">
                                         <label>Уровень</label>
                                         <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                               value="{{ s.minlevel }}" name="minlevel">
+                                               value="{{ i.minlevel }}" name="minlevel">
                                     </div>
                                     <div class=" col-md-4">
-                                        <label>Регион</label>
+                                        <label>Магазин</label>
                                         <div class="form-group row">
-                                            <select class="form-control" value="{{ s.country }}" name="country">
-                                                <option class="dropdown-item"
-                                                        value="US">Америка
-                                                </option>
-                                                <option class="dropdown-item"
-                                                        value="EU">Европа
-                                                </option>
+                                            <select class="form-control" value="{{ i.shopid }}" name="shopid">
+                                                {% for s in shops %}
+                                                    <option class="dropdown-item"
+                                                            value="{{ s.id }}">{{ s.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
