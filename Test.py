@@ -1,7 +1,11 @@
-from datetime import datetime
+import json
 
-from models import Shops, Items, Order, Adress
+import requests
 
-Adress.create(name="Патрик Иванов",adress="Улица генерала Федерова, 17б 120232")
-# Shops.select().where(Shops.country=="US" and Shops.minlevel<=0).execute()
-# print(len(Shops))
+
+files = {'image': open('res/logo.png','rb')}
+
+headers = {'Authorization': "TOKEN "+'aygXDbL1fwuPqs2C9B0i'}
+r=requests.post("https://api.imageban.ru/v1",headers=headers, files=files)
+
+print(json.loads(r.content.decode('utf-8'))["data"]["link"])
