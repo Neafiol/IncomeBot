@@ -58,14 +58,14 @@ def handle_docs_photo(message):
 
     if u.dstage == 2:
         order = Order.get_by_id(u.active_order)
-        order.other_data["Photo Data"] = url
+        order.other_data["photo_1"] = url
         order.save()
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
                          text=INFO_UPLOAD)
     elif u.dstage == 5:
         order = Order.get_by_id(u.active_order)
-        order.other_data["Order Photo"] = url
+        order.other_data["photo_2"] = url
         order.status = 1
         order.save()
         u.dstage = 0
@@ -80,7 +80,7 @@ def handle_docs_photo(message):
 @bot.message_handler(commands=['enter'])
 def repeat_all_messages(message):
     u = Users.get(Users.tel_id == message.chat.id)
-    u.level = 0
+    u.level = 1
     u.save()
     bot.send_message(message.chat.id, HELLO_TEXT, reply_markup=base_keyboard)
 
@@ -92,7 +92,7 @@ def repeat_all_messages(message):  # Название функции не игр
     u = Users.get_or_none(Users.tel_id == message.chat.id)
     if u == None:
         Users.create(tel_id=message.chat.id, name=str(message.from_user.last_name),
-                     nicname="Anonim", level=-1)
+                     nicname="Anonim", level=0)
 
         bot.send_message(message.chat.id, FIRST_TEXT)
     else:
@@ -350,7 +350,7 @@ def repeat_all_messages(message):
                              text="Я не отвечаю на сообщения")
 
         if u.dstage == 1:
-            order.other_data["Drop Data"] = message.text
+            order.other_data["text_1"] = message.text
             u.dstage = 0
             bot.send_message(chat_id=message.chat.id,
                              text=WAIT_MODERATOR)

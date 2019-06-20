@@ -7,10 +7,11 @@ $("form").submit(function (e) { // Устанавливаем событие о�
         url: "/cmd", // Путь до php файла отправителя
         data: form_data,
         success: function (data) { // если запрос успешен вызываем функцию
-            $("#alerttext").innerText=data;
+
             $("#toast").toast("show");
-            // setTimeout(()=>$('#toast').toast("hide"),4000);
-            alert(data); // добавлем текстовое содержимое в элемент с классом .myClass
+            $("#alerttext").text(data);
+            setTimeout(()=>$('#toast').toast("hide"),5000);
+            // alert(data); // добавлем текстовое содержимое в элемент с классом .myClass
         },
         error: function (data) {
             alert(data.responseText);

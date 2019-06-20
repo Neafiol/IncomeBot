@@ -52,18 +52,15 @@
         <a class="nav-link active" href="/orders">Orders</a>
     </li>
 </ul>
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+<div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
 
     <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto">Уведомление</strong>
-            <small>0 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
-        <div class="toast-body" id="alerttext">
-            Hello, world! This is a toast message.
+        <div class="toast-body">
+            <p id="alerttext">
+            </p>
         </div>
     </div>
 </div>
@@ -92,6 +89,9 @@
                     <div class="col-lg-3">
                         <div class="card-body ">
                             <h5 class="card-title">Автор: {{ o.userid }}</h5>
+                            {% for info in o.other_data %}
+                                <p>{{ o.other_data[info] }}</p>
+                            {% endfor %}
 
                             <form>
                                 <input type="hidden" name="id" value="{{ o.id }}">
@@ -114,8 +114,8 @@
                                         <option class="dropdown-item"
                                                 value="4">Получен
                                         </option>
-                                        <option class="dropdown-item" style="background-color: darkred"
-                                                value="del">Удален
+                                        <option class="dropdown-item" style="color: darkred"
+                                                value="del">Спам
                                         </option>
                                     </select>
                                 </div>
