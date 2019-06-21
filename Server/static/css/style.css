@@ -3,7 +3,11 @@
     margin-top: 30vh;
     width: 200px;
 }
-
+.coment_card{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
 
 .shopname{
     font-family: Consolas;

@@ -27,24 +27,55 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    {#    <script src="/js/bootstrap.min.js"></script>#}
+    {#    <script src="/js/jquery.confirm.min.js"></script>#}
+    {#    <script src="/js/run_prettify.js"></script>#}
+
 
 </head>
+
 <body>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link " href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/shops">Shops</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="/items/1">Items</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="/users">Users</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/orders/all">Orders</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="/coments">Coments</a>
+    </li>
+</ul>
 
-<div class="container">
-    <form method="get" action="/login" class="auth_form">
-        <div class="form-group">
-            <label for="exampleInputPassword1">Парольчик, пожалуйста</label>
-            <input type="password" name="pas" class="form-control" id="exampleInputPassword1"
-                   placeholder="1234">
+
+<div class="container body">
+
+    {% for c in coments %}
+        <div class="row coment_card">
+            <div class="col-lg-12">
+            <div class="card">
+                <h5 class="card-header">{{ c.autor }}</h5>
+                <div class="card-body ">
+                    <p><b>Коментарий:</b> {{ c.text }}</p>
+                </div>
+            </div>
         </div>
+        </div>
+    {% endfor %}
+    <div></div>
 
-        <input type="submit" class="btn btn-success auth_btn" style="width: 100%" value="Войти">
-    </form>
 </div>
 
+<script type="text/javascript" src="/js/index.js"></script>
 
 </body>
-
-
-
+</html>

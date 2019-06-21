@@ -294,7 +294,7 @@ def repeat_all_messages(message):
                          text=text, parse_mode="Markdown")
 
     elif message.text == BTN_13_TEXT:
-        Users.update({Users.dstage: 6}).where(Users.tel_id == message.chat.id).execute()
+        Users.update({Users.dstage: 11}).where(Users.tel_id == message.chat.id).execute()
         bot.send_message(message.chat.id, "Пришлите ваш отзыв")
 
     elif message.text == BTN_14_TEXT:
@@ -339,7 +339,7 @@ def repeat_all_messages(message):
 
     else:
         u = Users.get(Users.tel_id == message.chat.id)
-        if u.dstage == 6:
+        if u.dstage == 11:
             pass
             Comment.create(autor=u.name, text=message.text)
             bot.send_message(chat_id=message.chat.id,
@@ -373,6 +373,7 @@ def repeat_all_messages(message):
             u.dstage = 6
             bot.send_message(chat_id=message.chat.id,
                              text="Пришлите скриншот с ордером")
+
 
         u.save()
         order.save()

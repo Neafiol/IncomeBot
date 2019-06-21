@@ -4,17 +4,15 @@ import telebot
 from flask import Flask, send_from_directory, request, render_template, redirect, make_response
 
 from config import order_status, tel_token, PASS
-from models import Shops, Items, Adress, Users, Order
+from models import Shops, Items, Adress, Users, Order, Comment
 
 app = Flask(__name__)
 bot = telebot.TeleBot(tel_token)
 
 
-
 def pass_check(function_to_decorate):
     def wrapper(*args, **kwargs):
         p = request.cookies.get('PASS')
-        print(p)
         if p == PASS:
             return function_to_decorate(*args, **kwargs)
         else:
@@ -26,16 +24,14 @@ def pass_check(function_to_decorate):
 
 @app.route('/login')
 def login():
-
     if request.method == 'GET':
         p = request.args.get('pas')
         if p == PASS:
             resp = make_response(redirect('/'))
-            resp.set_cookie('pass', p)
+            resp.set_cookie('PASS', p)
             return resp
 
         return render_template("login.html")
-
 
 
 @app.route('/')
@@ -126,6 +122,13 @@ def items(id=0):
 def quizs():
     users = Users.select().execute()
     return render_template('users.html', users=users)
+
+
+@app.route('/coments')
+@pass_check
+def coments():
+    coments = Comment.select().execute()
+    return render_template('coments.html', coments=coments)
 
 
 @app.route('/orders/<type>')

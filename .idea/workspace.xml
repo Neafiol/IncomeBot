@@ -2,10 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a79afcd7-1b78-4aee-a217-72702c4e059a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Bot/run.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/templates/coments.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bot/telsent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bot/telsent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Server/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/items.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/items.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/shops.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/shops.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/users.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,18 +22,18 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/IncomeBot$models.coverage" NAME="models Coverage Results" MODIFIED="1561114840205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/IncomeBot$app.coverage" NAME="app Coverage Results" MODIFIED="1561124099600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
+    <SUITE FILE_PATH="coverage/IncomeBot$app.coverage" NAME="app Coverage Results" MODIFIED="1561150966767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
     <SUITE FILE_PATH="coverage/IncomeBot$Test.coverage" NAME="Test Coverage Results" MODIFIED="1561060947952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IncomeBot$telsent.coverage" NAME="telsent Coverage Results" MODIFIED="1561130453953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
     <SUITE FILE_PATH="coverage/IncomeBot$TextConstants.coverage" NAME="TextConstants Coverage Results" MODIFIED="1561030745079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+            <state relative-caret-position="124">
+              <caret line="339" column="9" lean-forward="true" selection-start-line="339" selection-start-column="9" selection-end-line="339" selection-end-column="9" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -35,10 +42,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/templates/coments.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="65" column="58" lean-forward="true" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="165" column="26" lean-forward="true" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
+            <state relative-caret-position="306">
+              <caret line="131" column="50" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -49,38 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="7" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Procfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" selection-start-column="19" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/templates/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="42" column="51" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
-              <folding>
-                <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/templates/orders.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="238">
+              <caret line="14" column="4" selection-start-line="14" selection-end-line="14" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -88,17 +83,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="544">
               <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="102">
+              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -106,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+            <state relative-caret-position="188">
+              <caret line="72" column="13" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="13" />
               <folding>
                 <element signature="e#1#21#0" expanded="true" />
               </folding>
@@ -126,9 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>TeleBot</find>
-      <find>Adres</find>
-      <find>where</find>
       <find>base_keyboard</find>
       <find>от</find>
       <find>Купил</find>
@@ -154,6 +146,11 @@
       <find>log</find>
       <find>log.info</find>
       <find>enter</find>
+      <find>Отз</find>
+      <find>8</find>
+      <find>&lt;a class=&quot;nav-link&quot; href=&quot;/orders/all&quot;&gt;Orders&lt;/a&gt;</find>
+      <find>href=&quot;/orders/all&quot;&gt;Orders&lt;/a&gt;</find>
+      <find>href=&quot;/orders/all&quot;&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>Adress</replace>
@@ -172,20 +169,21 @@
         <option value="$PROJECT_DIR$/Bot/telegram.py" />
         <option value="$PROJECT_DIR$/Test.py" />
         <option value="$PROJECT_DIR$/Server/static/js/index.js" />
-        <option value="$PROJECT_DIR$/Server/templates/index.html" />
-        <option value="$PROJECT_DIR$/Server/templates/items.html" />
-        <option value="$PROJECT_DIR$/Server/templates/shops.html" />
-        <option value="$PROJECT_DIR$/Server/templates/users.html" />
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/Bot/TextConstants.py" />
-        <option value="$PROJECT_DIR$/Server/templates/orders.html" />
-        <option value="$PROJECT_DIR$/Server/static/css/style.css" />
-        <option value="$PROJECT_DIR$/Server/templates/login.html" />
-        <option value="$PROJECT_DIR$/Server/app.py" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/Bot/run.bat" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/Server/templates/login.html" />
         <option value="$PROJECT_DIR$/Bot/telsent.py" />
+        <option value="$PROJECT_DIR$/Server/app.py" />
+        <option value="$PROJECT_DIR$/Server/templates/coments.html" />
+        <option value="$PROJECT_DIR$/Server/templates/users.html" />
+        <option value="$PROJECT_DIR$/Server/templates/items.html" />
+        <option value="$PROJECT_DIR$/Server/templates/shops.html" />
+        <option value="$PROJECT_DIR$/Server/templates/index.html" />
+        <option value="$PROJECT_DIR$/Server/templates/orders.html" />
+        <option value="$PROJECT_DIR$/Server/static/css/style.css" />
       </list>
     </option>
   </component>
@@ -220,6 +218,25 @@
               <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
               <item name="Server" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="IncomeBot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IncomeBot" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -237,8 +254,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\programers_files\Projects\IncomeBot" />
       <recent name="E:\programers_files\Projects\IncomeBot\Server\templates" />
+      <recent name="E:\programers_files\Projects\IncomeBot" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -253,7 +270,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.telsent">
+  <component name="RunManager" selected="Python.app">
     <configuration name="orders.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/IncomeBot/Server/templates/orders.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -389,17 +406,18 @@
       <updated>1560935004808</updated>
       <workItem from="1560935006356" duration="36281000" />
       <workItem from="1561027043330" duration="49174000" />
+      <workItem from="1561148783333" duration="2332000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85455000" />
+    <option name="totallyTimeSpent" value="87787000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -450,30 +468,11 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Bot/supfile.py" />
-    <entry file="file://$PROJECT_DIR$/Bot/telegram.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="11" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Bot/telegram.py" />
     <entry file="file://$PROJECT_DIR$/Test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -504,69 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="67" column="6" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#form#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#form#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#form#0;n#tr#2;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#form#0;n#tr#3;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
-          <folding>
-            <element signature="e#1#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/templates/orders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="42" column="51" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
-          <folding>
-            <element signature="n#style#0;n#input#1;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/requests/sessions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7102">
@@ -581,30 +517,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/Procfile">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="7" selection-end-column="7" />
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/app.py">
+    <entry file="file://$PROJECT_DIR$/Server/templates/orders.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="165" column="26" lean-forward="true" selection-start-line="165" selection-start-column="26" selection-end-line="165" selection-end-column="26" />
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bot/TextConstants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="50" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="4" selection-start-line="14" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1016">
+          <caret line="67" column="6" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="72" column="13" selection-start-line="72" selection-start-column="6" selection-end-line="72" selection-end-column="13" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#1#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+        <state relative-caret-position="124">
+          <caret line="339" column="9" lean-forward="true" selection-start-line="339" selection-start-column="9" selection-end-line="339" selection-end-column="9" />
           <folding>
             <element signature="e#24#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="131" column="50" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/templates/coments.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="65" column="58" lean-forward="true" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
         </state>
       </provider>
     </entry>
