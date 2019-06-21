@@ -135,6 +135,9 @@
                                             <select class="form-control" value="{{ i.shopid }}" name="shopid">
                                                 {% for s in shops %}
                                                     <option class="dropdown-item"
+                                                            {% if i.shopid == s.id %}
+                                                                selected
+                                                            {% endif %}
                                                             value="{{ s.id }}">{{ s.name }}</option>
                                                 {% endfor %}
                                             </select>

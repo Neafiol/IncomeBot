@@ -84,10 +84,13 @@ def com():
         else:
             o = Order.get_by_id(c["id"])
             u = Users.get_by_id(o.userid)
-            bot.send_message(u.tel_id,
-                             f"Статус заказа {o.name} обновлен: _{order_status[int(c['status'])]}_",
-                             parse_mode="Markdown")
-            o.status = c["status"]
+            try:
+                bot.send_message(u.tel_id,
+                                 f"Статус заказа {o.name} обновлен: _{order_status[int(c['status'])]}_",
+                                 parse_mode="Markdown")
+            except:
+                pass
+            o.status = int(c["status"])
             o.save()
 
         return "Статус заказа обновлен"
