@@ -1,14 +1,45 @@
-import telebot
-from flask import Flask, send_from_directory, request, render_template, redirect
+import os
 
-from config import order_status, tel_token
+import telebot
+from flask import Flask, send_from_directory, request, render_template, redirect, make_response
+
+from config import order_status, tel_token, PASS
 from models import Shops, Items, Adress, Users, Order
 
 app = Flask(__name__)
 bot = telebot.TeleBot(tel_token)
 
 
+
+def pass_check(function_to_decorate):
+    def wrapper(*args, **kwargs):
+        p = request.cookies.get('PASS')
+        print(p)
+        if p == PASS:
+            return function_to_decorate(*args, **kwargs)
+        else:
+            return redirect("/login")
+
+    wrapper.__name__ = function_to_decorate.__name__
+    return wrapper
+
+
+@app.route('/login')
+def login():
+
+    if request.method == 'GET':
+        p = request.args.get('pas')
+        if p == PASS:
+            resp = make_response(redirect('/'))
+            resp.set_cookie('pass', p)
+            return resp
+
+        return render_template("login.html")
+
+
+
 @app.route('/')
+@pass_check
 def root():
     shops = Shops.select()
     return render_template('index.html', shops=shops)
@@ -73,6 +104,7 @@ def com():
 
 
 @app.route('/shops')
+@pass_check
 def shops():
     shops = Shops.select().order_by(Shops.id).execute()
 
@@ -80,6 +112,7 @@ def shops():
 
 
 @app.route('/items/<int:id>')
+@pass_check
 def items(id=0):
     print(id)
     items = Items.select().where(Items.shopid == id).execute()
@@ -89,12 +122,14 @@ def items(id=0):
 
 
 @app.route('/users')
+@pass_check
 def quizs():
     users = Users.select().execute()
     return render_template('users.html', users=users)
 
 
 @app.route('/orders/<type>')
+@pass_check
 def orders(type):
     if type == "all":
         orders = Order.select().execute()
@@ -118,14 +153,6 @@ def orders(type):
     return render_template('orders.html', orders=orders, order_status=order_status)
 
 
-@app.route('/', methods=['POST'])
-def upload_view():
-    file = request.files['TEST']
-    print(file)
-    # file.save('ff.txt')
-    pass
-
-
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('static/js', path)
@@ -137,4 +164,18 @@ def send_css(path):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=9000, debug=False)
+
+    if 'DYNO' in os.environ:
+        DEBUG = False
+    else:
+        DEBUG = True
+    port = os.environ.get('PORT', 5000)
+    '''
+    Запуск возможен в 2ух режимах,
+    при запуске на продакшен используется waitress
+    '''
+    if DEBUG:
+        app.run('127.0.0.1', port, debug=True)
+    else:
+        app.run('0.0.0.0', port, debug=False)
+        # serve(app, host='0.0.0.0', port=port)

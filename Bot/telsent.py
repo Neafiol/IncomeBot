@@ -2,6 +2,7 @@
 import json
 import sys
 from datetime import datetime
+from threading import Thread
 
 import requests
 
@@ -375,13 +376,18 @@ def repeat_all_messages(message):
 
     log(str(message.from_user.last_name) + ' : ' + message.text)
 
-
-# Main Fanction
-if __name__ == '__main__':
+def run(debag=True):
     while True:
         try:
             print("start")
-            bot.polling(none_stop=True)
+            Thread(target=bot.infinity_polling).start()
+            # bot.polling(none_stop=True)
         except:
             print("Error")
-            exit(0)
+            if(debag):
+                exit(0)
+
+
+# Main Fanction
+if __name__ == '__main__':
+    run()

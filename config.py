@@ -12,6 +12,7 @@ bdpassword='telardpro'
 bdhost='18.217.7.207'
 bdport=5432
 
+PASS="paule"
 order_status=["Проверка трэк номера",#0
               "В пути",#1
               "Проверка получения дропом",#2

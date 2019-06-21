@@ -6,6 +6,7 @@
         <list>
           <option value="Bot.telsent.TextConstants" />
           <option value="Test.Crypto" />
+          <option value="Server.app.telsent" />
         </list>
       </option>
     </inspection_tool>

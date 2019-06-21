@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)/ -->
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="https://im0-tub-ru.yandex.net/i?id=fbe2cb74572414c533ee7de18c3af3da&n=13"
+          type="image/x-icon">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/js/jquery-1.11.3.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+<div class="container">
+    <form method="get" action="/login" class="auth_form">
+        <input type="hidden" name="target" value="{{ target }}"/>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Парольчик, пожалуйста</label>
+            <input type="password" name="pas" class="form-control" id="exampleInputPassword1"
+                   placeholder="1234">
+        </div>
+
+        <input type="submit" class="btn btn-success auth_btn" style="width: 100%" value="Войти">
+    </form>
+</div>
+
+
+</body>
+
+
+
