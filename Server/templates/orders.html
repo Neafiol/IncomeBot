@@ -52,7 +52,8 @@
         <a class="nav-link active" href="/orders">Orders</a>
     </li>
 </ul>
-<div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
+<div aria-live="polite" aria-atomic="true"
+     style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
 
     <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
         <div class="toast-header">
@@ -76,6 +77,13 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="/orders/all">Все</a>
+                <a class="dropdown-item" href="/orders/active">Требуют модерации</a>
+                <a class="dropdown-item" href="/orders/way">В пути</a>
+                <a class="dropdown-item" href="/orders/drop">Доставлено Дропу</a>
+                <a class="dropdown-item" href="/orders/payed">Оплачены</a>
+                <a class="dropdown-item" href="/orders/received">Получены</a>
+                <a class="dropdown-item" href="/orders/cancle">Отменены</a>
+                <a class="dropdown-item" href="/orders/close">Закрыты</a>
             </div>
         </div>
 
@@ -89,31 +97,19 @@
                     <div class="col-lg-3">
                         <div class="card-body ">
                             <h5 class="card-title">Автор: {{ o.userid }}</h5>
-                            {% for info in o.other_data %}
-                                <p>{{ o.other_data[info] }}</p>
-                            {% endfor %}
-
+                            <p>Коментарий: {{ o.other_data["comment"] }}</p>
+                            <p>Информация о дропе: {{ o.other_data["dropinfo_1"] }}</p>
                             <form>
                                 <input type="hidden" name="id" value="{{ o.id }}">
                                 <input type="hidden" name="cmd" value="update_order">
                                 <div class="form-group">
                                     <select class="form-control"
                                             value="{{ o.status }}" name="status">
-                                        <option class="dropdown-item"
-                                                value="1">На модерации
-                                        </option>
-                                        <option class="dropdown-item"
-                                                value="2">В пути
-                                        </option>
-                                        <option class="dropdown-item"
-                                                value="3">Доставлен дропу
-                                        </option>
-                                        <option class="dropdown-item"
-                                                value="4">Едет в Россию
-                                        </option>
-                                        <option class="dropdown-item"
-                                                value="4">Получен
-                                        </option>
+                                        {% for i in range(9) %}
+                                            <option class="dropdown-item" style="color: darkred"
+                                                    value="{{ i }}">{{ order_status[i] }}
+                                            </option>
+                                        {% endfor %}
                                         <option class="dropdown-item" style="color: darkred"
                                                 value="del">Спам
                                         </option>
@@ -128,22 +124,26 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
-                             class="card-img orderphoto">
-                    </div>
-                    <div class="col-lg-3">
                         <a target="_blank"
-                           href="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig">
-                            <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
-                                 alt="О получении"
+                           href="{{ o.other_data["photo_1"] }}">
+                            <img src="{{ o.other_data["photo_1"] }}"
+                                 alt="Трэк номер"
                                  class="card-img orderphoto">
                         </a>
                     </div>
                     <div class="col-lg-3">
                         <a target="_blank"
-                           href="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig">
-                            <img src="https://avatars.mds.yandex.net/get-marketpic/250456/market_s4psAgyJBXyyME5ymE_2rQ/orig"
-                                 alt="О получении"
+                           href="{{ o.other_data["photo_2"] }}">
+                            <img src="{{ o.other_data["photo_2"] }}"
+                                 alt="Подтверждение получения"
+                                 class="card-img orderphoto">
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <a target="_blank"
+                           href="{{ o.other_data["photo_3"] }}">
+                            <img src="{{ o.other_data["photo_3"] }}"
+                                 alt="Подтверждение выплаты"
                                  class="card-img orderphoto">
                         </a>
                     </div>

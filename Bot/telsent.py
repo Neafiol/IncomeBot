@@ -56,17 +56,18 @@ def handle_docs_photo(message):
     url = json.loads(r.content.decode('utf-8'))["data"]["link"]
     print("Upload photo", url)
 
-    if u.dstage == 2:
+    if u.dstage == 8:
         order = Order.get_by_id(u.active_order)
-        order.other_data["photo_1"] = url
+        order.other_data["photo_2"] = url
+        order.status = 0
         order.save()
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
                          text=INFO_UPLOAD)
-    elif u.dstage == 5:
+    elif u.dstage == 6:
         order = Order.get_by_id(u.active_order)
-        order.other_data["photo_2"] = url
-        order.status = 1
+        order.other_data["photo_1"] = url
+        order.status = 2
         order.save()
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
@@ -157,7 +158,7 @@ def repeat_all_messages(call):
 
             elif (cal.find("neworder") >= 0):
                 u = Users.get(Users.tel_id == call.message.chat.id)
-                o = Order(url="", data=datetime.now(), userid=u.id, name="")
+                o = Order(url="", data=datetime.now(),status=-1, userid=u.id, name="")
                 o.save()
                 u.dstage = 3
                 u.active_order = o.id
@@ -166,6 +167,7 @@ def repeat_all_messages(call):
                 bot.send_message(chat_id=call.message.chat.id,
                                  text=ITEM_NAME,
                                  parse_mode="Markdown")
+
             elif (cal.find("buy") >= 0):
                 item_id = int(cal.split("_")[1])
                 u = Users.get(Users.tel_id == call.message.chat.id)
@@ -183,7 +185,7 @@ def repeat_all_messages(call):
                 u = Users.get(Users.tel_id == call.message.chat.id)
 
                 if cmd == "drop":
-                    order.status = -1
+                    order.status = 7
                     bot.delete_message(chat_id=call.message.chat.id,
                                        message_id=call.message.message_id)
                     bot.send_message(chat_id=call.message.chat.id,
@@ -192,30 +194,27 @@ def repeat_all_messages(call):
 
                 u.active_order = order
                 if cmd == "toes":
-                    order.status = 1
-                    u.dstage = 1
+                    order.status = 2
+                    u.dstage = 9
                     text = "Пришлите данные для доступа к дропу"
 
                 elif cmd == "todrop":
                     order.status = 2
-                    u.dstage = 2
+                    u.dstage = 8
                     text = "Пришлите скрин подтверждения доставки"
 
                 elif cmd == "torus":
-                    u.dstage = 2
+                    u.dstage = 8
                     order.status = 3
                     text = "Пришлите скрин подтверждения доставки"
 
                 order.save()
                 u.save()
 
-                bot.send_message(chat_id=call.message.chat.id,
-                                 text=text,
-                                 parse_mode="Markdown")
 
                 bot.edit_message_text(chat_id=call.message.chat.id,
                                       message_id=call.message.message_id,
-                                      text="_Заказ Обробатывается_",
+                                      text="Заказ на *" + order.name + "*\n"+text,
                                       parse_mode="Markdown")
 
             elif cal.find("getorders") >= 0:
@@ -223,7 +222,7 @@ def repeat_all_messages(call):
                 markup = types.InlineKeyboardMarkup(row_width=1)
                 buttons = []
                 u = Users.get(Users.tel_id == call.message.chat.id)
-                orders = Order.select().where(Order.userid == u.id and Order.status >= 0).execute()
+                orders = Order.select().where(Order.userid == u.id and Order.status >=0 and Order.status <5).execute()
 
                 for o in orders:
                     buttons.append(types.InlineKeyboardButton(text=o.name, callback_data="order_" + str(o.id)))
@@ -240,21 +239,22 @@ def repeat_all_messages(call):
                 print(cal)
                 order = int(cal.split("_")[1])
                 markup = types.InlineKeyboardMarkup(row_width=2)
-
                 order = Order.get(Order.id == order)
 
                 markup.add(types.InlineKeyboardButton(text=COME_AWAY,
                                                       callback_data="orderstatus_drop_" + str(order.id)))
-                markup.add(
-                    types.InlineKeyboardButton(text=COME_TO_DROP, callback_data="orderstatus_toes_" + str(order.id)))
-                markup.add(types.InlineKeyboardButton(text=COME_RESEND,
-                                                      callback_data="orderstatus_todrop_" + str(order.id)))
-                markup.add(
-                    types.InlineKeyboardButton(text=COME_TO_RUS, callback_data="orderstatus_torus_" + str(order.id)))
+
+                if order.status == 1: #oreder is active
+
+                    markup.add(
+                        types.InlineKeyboardButton(text=COME_TO_DROP, callback_data="orderstatus_toes_" + str(order.id)))
+                    markup.add(types.InlineKeyboardButton(text=COME_RESEND,
+                                                          callback_data="orderstatus_todrop_" + str(order.id)))
+                    markup.add(
+                        types.InlineKeyboardButton(text=COME_TO_RUS, callback_data="orderstatus_torus_" + str(order.id)))
 
                 bot.send_message(chat_id=call.message.chat.id,
-                                 text="Заказ на *" + order.name + "*\nПожалуйста, проставьте статус товару после "
-                                                                  "завершения покупки",
+                                 text="Заказ *" + order.name + "*\nСтатус: _"+order_status[order.status]+"_\nВыбирете ноывй статус заказа",
                                  reply_markup=markup,
                                  parse_mode="Markdown")
 
@@ -349,8 +349,8 @@ def repeat_all_messages(message):
             bot.send_message(chat_id=message.chat.id,
                              text="Я не отвечаю на сообщения")
 
-        if u.dstage == 1:
-            order.other_data["text_1"] = message.text
+        if u.dstage == 9:
+            order.other_data["dropinfo_1"] = message.text
             u.dstage = 0
             bot.send_message(chat_id=message.chat.id,
                              text=WAIT_MODERATOR)
@@ -360,8 +360,13 @@ def repeat_all_messages(message):
             bot.send_message(chat_id=message.chat.id,
                              text=SEND_ORDER_URL)
         elif u.dstage == 4:
-            order.url = message.text
+            order.name = message.text
             u.dstage = 5
+            bot.send_message(chat_id=message.chat.id,
+                             text=SEND_ORDER_COMMENT)
+        elif u.dstage == 5:
+            order.url = message.text
+            u.dstage = 6
             bot.send_message(chat_id=message.chat.id,
                              text="Пришлите скриншот с ордером")
 

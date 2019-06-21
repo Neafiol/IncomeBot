@@ -58,7 +58,13 @@ class Order(Model):
     data=DateTimeField()
     status=IntegerField(default=0)
     userid = IntegerField()
-    other_data = JSONField(default={})
+    other_data = JSONField(default={
+        "photo_1":"",
+        "photo_2":"",
+        "photo_3":"",
+        "dropinfo_1":"",
+        "comment":""
+    })
 
     class Meta:
         database = db

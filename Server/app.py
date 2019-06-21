@@ -1,8 +1,11 @@
+import telebot
 from flask import Flask, send_from_directory, request, render_template, redirect
 
+from config import order_status, tel_token
 from models import Shops, Items, Adress, Users, Order
 
 app = Flask(__name__)
+bot = telebot.TeleBot(tel_token)
 
 
 @app.route('/')
@@ -19,7 +22,12 @@ def com():
     print(c)
 
     if comand == "send_mes":
-        print("sent_message: " + c["message"])
+        users = Users.select()
+        for u in users:
+            bot.send_message(u.tel_id,
+                             c["message"],
+                             parse_mode="Markdown")
+        print(f"Отправлено {len(users)} cообщений")
 
     elif comand == "new_shop":
         Shops.create(**c)
@@ -44,11 +52,15 @@ def com():
         return "Пользователь обновлен"
 
     elif comand == "update_order":
-        if(c["status"]=="del"):
+        if (c["status"] == "del"):
             Order.delete_by_id(c["id"])
         else:
             o = Order.get_by_id(c["id"])
-            o.status=c["status"]
+            u = Users.get_by_id(o.userid)
+            bot.send_message(u.tel_id,
+                             f"Статус заказа {o.name} обновлен: _{order_status[int(c['status'])]}_",
+                             parse_mode="Markdown")
+            o.status = c["status"]
             o.save()
 
         return "Статус заказа обновлен"
@@ -79,12 +91,31 @@ def items(id=0):
 @app.route('/users')
 def quizs():
     users = Users.select().execute()
-    return render_template('users.html', users=users)\
+    return render_template('users.html', users=users)
 
-@app.route('/orders')
-def orders():
-    orders = Order.select().execute()
-    return render_template('orders.html', orders=orders)
+
+@app.route('/orders/<type>')
+def orders(type):
+    if type == "all":
+        orders = Order.select().execute()
+    elif type == "active":
+        orders = Order.select().where(Order.id << [0, 2]).execute()
+    elif type == "way":
+        orders = Order.select().where(Order.id << [1, 4]).execute()
+    elif type == "drop":
+        orders = Order.select().where(Order.id == 3).execute()
+    elif type == "payed":
+        orders = Order.select().where(Order.id == 6).execute()
+    elif type == "received":
+        orders = Order.select().where(Order.id == 5).execute()
+    elif type == "cancle":
+        orders = Order.select().where(Order.id == 7).execute()
+    elif type == "close":
+        orders = Order.select().where(Order.id == 8).execute()
+    else:
+        return "Тип сортировки не указан"
+
+    return render_template('orders.html', orders=orders, order_status=order_status)
 
 
 @app.route('/', methods=['POST'])
