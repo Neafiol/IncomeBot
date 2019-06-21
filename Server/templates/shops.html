@@ -118,9 +118,15 @@
                                         <div class="form-group row">
                                             <select class="form-control" value="{{ s.country }}" name="country">
                                                 <option class="dropdown-item"
+                                                        {% if s.country== "US" %}
+                                                                selected
+                                                            {% endif %}
                                                         value="US">Америка
                                                 </option>
                                                 <option class="dropdown-item"
+                                                        {% if s.country== "EU" %}
+                                                                selected
+                                                            {% endif %}
                                                         value="EU">Европа
                                                 </option>
                                             </select>

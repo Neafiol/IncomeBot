@@ -110,6 +110,9 @@
                                             value="{{ o.status }}" name="status">
                                         {% for i in range(9) %}
                                             <option class="dropdown-item" style="color: darkred"
+                                                    {% if o.status== i %}
+                                                    selected
+                                                    {% endif %}
                                                     value="{{ i }}">{{ order_status[i] }}
                                             </option>
                                         {% endfor %}

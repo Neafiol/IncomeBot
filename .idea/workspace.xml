@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a79afcd7-1b78-4aee-a217-72702c4e059a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Server/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/templates/shops.html" beforeDir="false" afterPath="$PROJECT_DIR$/Server/templates/shops.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,7 +13,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/IncomeBot$models.coverage" NAME="models Coverage Results" MODIFIED="1561114840205" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/IncomeBot$app.coverage" NAME="app Coverage Results" MODIFIED="1561150966767" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
+    <SUITE FILE_PATH="coverage/IncomeBot$app.coverage" NAME="app Coverage Results" MODIFIED="1561155524547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Server" />
     <SUITE FILE_PATH="coverage/IncomeBot$Test.coverage" NAME="Test Coverage Results" MODIFIED="1561060947952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/IncomeBot$telsent.coverage" NAME="telsent Coverage Results" MODIFIED="1561130453953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
     <SUITE FILE_PATH="coverage/IncomeBot$TextConstants.coverage" NAME="TextConstants Coverage Results" MODIFIED="1561030745079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Bot" />
@@ -40,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-170">
+            <state relative-caret-position="-374">
               <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -52,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+            <state relative-caret-position="233">
+              <caret line="135" column="68" lean-forward="true" selection-start-line="135" selection-start-column="68" selection-end-line="135" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -111,8 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>buy</find>
-      <find>edit_message_text</find>
       <find>shops</find>
       <find>favicon.ico</find>
       <find>inde</find>
@@ -141,6 +140,8 @@
       <find>in</find>
       <find>get</find>
       <find>geto</find>
+      <find>selec</find>
+      <find>select</find>
     </findStrings>
     <replaceStrings>
       <replace>Adress</replace>
@@ -166,14 +167,14 @@
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/Server/templates/login.html" />
         <option value="$PROJECT_DIR$/Server/templates/users.html" />
-        <option value="$PROJECT_DIR$/Server/templates/items.html" />
-        <option value="$PROJECT_DIR$/Server/templates/shops.html" />
-        <option value="$PROJECT_DIR$/Server/templates/index.html" />
-        <option value="$PROJECT_DIR$/Server/templates/orders.html" />
         <option value="$PROJECT_DIR$/Server/static/css/style.css" />
         <option value="$PROJECT_DIR$/Server/templates/coments.html" />
         <option value="$PROJECT_DIR$/Bot/telsent.py" />
         <option value="$PROJECT_DIR$/Server/app.py" />
+        <option value="$PROJECT_DIR$/Server/templates/items.html" />
+        <option value="$PROJECT_DIR$/Server/templates/orders.html" />
+        <option value="$PROJECT_DIR$/Server/templates/shops.html" />
+        <option value="$PROJECT_DIR$/Server/templates/index.html" />
       </list>
     </option>
   </component>
@@ -396,22 +397,23 @@
       <updated>1560935004808</updated>
       <workItem from="1560935006356" duration="36281000" />
       <workItem from="1561027043330" duration="49174000" />
-      <workItem from="1561148783333" duration="3859000" />
+      <workItem from="1561148783333" duration="5471000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89314000" />
+    <option name="totallyTimeSpent" value="90926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -582,20 +584,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-170">
+        <state relative-caret-position="-374">
           <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/templates/items.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="135" column="68" lean-forward="true" selection-start-line="135" selection-start-column="68" selection-end-line="135" selection-end-column="68" />
         </state>
       </provider>
     </entry>
