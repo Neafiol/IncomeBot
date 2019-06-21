@@ -2,24 +2,25 @@
 import json
 import sys
 from datetime import datetime
-from threading import Thread
 
 import requests
 
-from Bot.TextConstants import *
-
 sys.path.append('../')
-
 from models import *
-
 import telebot
 from telebot import types
-from TextConstants import *
+from Bot.TextConstants import *
 
 
-def log(txt):
-    print(txt)
 
+import logging
+
+# add filemode="w" to overwrite
+logging.basicConfig(filename="sample.log", level=logging.INFO)
+
+
+
+#BOT CODE
 
 bot = telebot.TeleBot(tel_token)
 base_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -79,7 +80,7 @@ def handle_docs_photo(message):
 
 
 # Comand for enter in bot
-@bot.message_handler(commands=['enter'])
+@bot.message_handler(commands=[PASS_TG])
 def repeat_all_messages(message):
     u = Users.get(Users.tel_id == message.chat.id)
     u.level = 1
@@ -159,7 +160,7 @@ def repeat_all_messages(call):
 
             elif (cal.find("neworder") >= 0):
                 u = Users.get(Users.tel_id == call.message.chat.id)
-                o = Order(url="", data=datetime.now(),status=-1, userid=u.id, name="")
+                o = Order(url="", data=datetime.now(), status=-1, userid=u.id, name="")
                 o.save()
                 u.dstage = 3
                 u.active_order = o.id
@@ -212,10 +213,9 @@ def repeat_all_messages(call):
                 order.save()
                 u.save()
 
-
                 bot.edit_message_text(chat_id=call.message.chat.id,
                                       message_id=call.message.message_id,
-                                      text="Заказ на *" + order.name + "*\n"+text,
+                                      text="Заказ на *" + order.name + "*\n" + text,
                                       parse_mode="Markdown")
 
             elif cal.find("getorders") >= 0:
@@ -223,7 +223,7 @@ def repeat_all_messages(call):
                 markup = types.InlineKeyboardMarkup(row_width=1)
                 buttons = []
                 u = Users.get(Users.tel_id == call.message.chat.id)
-                orders = Order.select().where(Order.userid == u.id and Order.status >=0 and Order.status <5).execute()
+                orders = Order.select().where(Order.userid == u.id and Order.status >= 0 and Order.status < 5).execute()
 
                 for o in orders:
                     buttons.append(types.InlineKeyboardButton(text=o.name, callback_data="order_" + str(o.id)))
@@ -245,17 +245,20 @@ def repeat_all_messages(call):
                 markup.add(types.InlineKeyboardButton(text=COME_AWAY,
                                                       callback_data="orderstatus_drop_" + str(order.id)))
 
-                if order.status == 1: #oreder is active
+                if order.status == 1:  # oreder is active
 
                     markup.add(
-                        types.InlineKeyboardButton(text=COME_TO_DROP, callback_data="orderstatus_toes_" + str(order.id)))
+                        types.InlineKeyboardButton(text=COME_TO_DROP,
+                                                   callback_data="orderstatus_toes_" + str(order.id)))
                     markup.add(types.InlineKeyboardButton(text=COME_RESEND,
                                                           callback_data="orderstatus_todrop_" + str(order.id)))
                     markup.add(
-                        types.InlineKeyboardButton(text=COME_TO_RUS, callback_data="orderstatus_torus_" + str(order.id)))
+                        types.InlineKeyboardButton(text=COME_TO_RUS,
+                                                   callback_data="orderstatus_torus_" + str(order.id)))
 
                 bot.send_message(chat_id=call.message.chat.id,
-                                 text="Заказ *" + order.name + "*\nСтатус: _"+order_status[order.status]+"_\nВыбирете ноывй статус заказа",
+                                 text="Заказ *" + order.name + "*\nСтатус: _" + order_status[
+                                     order.status] + "_\nВыбирете ноывй статус заказа",
                                  reply_markup=markup,
                                  parse_mode="Markdown")
 
@@ -374,20 +377,20 @@ def repeat_all_messages(message):
         u.save()
         order.save()
 
-    log(str(message.from_user.last_name) + ' : ' + message.text)
+    print(str(message.from_user.last_name) + ' : ' + message.text)
+
 
 def run(debag=True):
     while True:
         try:
-            print("start")
-            Thread(target=bot.infinity_polling).start()
-            # bot.polling(none_stop=True)
+            print("Income bot start")
+            bot.polling(none_stop=True)
         except:
             print("Error")
-            if(debag):
+            if (debag):
                 exit(0)
 
 
 # Main Fanction
 if __name__ == '__main__':
-    run()
+    run(True)
