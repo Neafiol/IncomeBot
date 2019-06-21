@@ -348,11 +348,11 @@ def repeat_all_messages(message):
             u.save()
             return
 
-        order = Order.get_by_id(u.active_order)
         if u.dstage == 0:
             bot.send_message(chat_id=message.chat.id,
                              text="Я не отвечаю на сообщения")
 
+        order = Order.get_by_id(u.active_order)
         if u.dstage == 9:
             order.other_data["dropinfo_1"] = message.text
             u.dstage = 0
