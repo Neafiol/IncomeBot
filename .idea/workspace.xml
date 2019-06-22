@@ -36,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="308" column="65" selection-start-line="308" selection-start-column="65" selection-end-line="308" selection-end-column="65" />
+            <state relative-caret-position="114">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#24#35#0" expanded="true" />
               </folding>
@@ -78,7 +78,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/app.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="131">
@@ -146,8 +146,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>order&quot;</find>
-      <find>orderstatus</find>
       <find>_&quot;+</find>
       <find>Order.s</find>
       <find>other_data</find>
@@ -176,6 +174,8 @@
       <find>dict</find>
       <find>orser_by</find>
       <find>order</find>
+      <find>sta</find>
+      <find>start</find>
     </findStrings>
     <replaceStrings>
       <replace>Adress</replace>
@@ -207,10 +207,10 @@
         <option value="$PROJECT_DIR$/Server/templates/users.html" />
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/Bot/TextConstants.py" />
-        <option value="$PROJECT_DIR$/Bot/telsent.py" />
         <option value="$PROJECT_DIR$/Server/templates/coments.html" />
         <option value="$PROJECT_DIR$/Server/static/js/index.js" />
         <option value="$PROJECT_DIR$/Server/app.py" />
+        <option value="$PROJECT_DIR$/Bot/telsent.py" />
       </list>
     </option>
   </component>
@@ -442,12 +442,12 @@
       <workItem from="1560935006356" duration="36281000" />
       <workItem from="1561027043330" duration="49174000" />
       <workItem from="1561148783333" duration="8970000" />
-      <workItem from="1561189709021" duration="7782000" />
+      <workItem from="1561189709021" duration="8548000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102207000" />
+    <option name="totallyTimeSpent" value="102973000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -619,16 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="308" column="65" selection-start-line="308" selection-start-column="65" selection-end-line="308" selection-end-column="65" />
-          <folding>
-            <element signature="e#24#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/templates/coments.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
@@ -649,6 +639,16 @@
           <caret line="134" column="51" selection-start-line="134" selection-start-column="51" selection-end-line="134" selection-end-column="51" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Bot/telsent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="e#24#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

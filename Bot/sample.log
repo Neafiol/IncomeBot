@@ -104,3 +104,4 @@ INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1):
 INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org
 INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org
 INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): api.telegram.org
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: api.telegram.org
