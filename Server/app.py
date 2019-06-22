@@ -3,6 +3,7 @@ import os
 import telebot
 from flask import Flask, send_from_directory, request, render_template, redirect, make_response
 
+from Bot.TextConstants import ADMIN_USERNAME
 from config import order_status, tel_token, PASS
 app = Flask(__name__)
 bot = telebot.TeleBot(tel_token)
@@ -88,9 +89,13 @@ def com():
         else:
             o = Order.get_by_id(c["id"])
             u = Users.get_by_id(o.userid)
+            adtext=""
+            if(c["status"]=="3"):
+                adtext="\nДля дальнейших операций с заказом просьба связаться с администратором: "+ADMIN_USERNAME
             try:
+
                 bot.send_message(u.tel_id,
-                                 f"Статус заказа {o.name} обновлен: _{order_status[int(c['status'])]}_",
+                                 f"Статус заказа {o.name} обновлен: _{order_status[int(c['status'])]}_"+adtext,
                                  parse_mode="Markdown")
             except:
                 pass
