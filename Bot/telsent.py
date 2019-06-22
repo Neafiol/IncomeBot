@@ -11,16 +11,12 @@ import telebot
 from telebot import types
 from Bot.TextConstants import *
 
-
-
 import logging
 
 # add filemode="w" to overwrite
 logging.basicConfig(filename="sample.log", level=logging.INFO)
 
-
-
-#BOT CODE
+# BOT CODE
 
 bot = telebot.TeleBot(tel_token)
 base_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -83,9 +79,10 @@ def handle_docs_photo(message):
 @bot.message_handler(commands=[PASS_TG])
 def repeat_all_messages(message):
     u = Users.get(Users.tel_id == message.chat.id)
+    u.dstage = 12  # nicname
     u.level = 1
     u.save()
-    bot.send_message(message.chat.id, HELLO_TEXT, reply_markup=base_keyboard)
+    bot.send_message(message.chat.id, SEND_NICNAME)
 
 
 # Start Fanction
@@ -94,7 +91,8 @@ def repeat_all_messages(message):  # Название функции не игр
 
     u = Users.get_or_none(Users.tel_id == message.chat.id)
     if u == None:
-        Users.create(tel_id=message.chat.id, name=str(message.from_user.last_name),
+        Users.create(tel_id=message.chat.id, name=str(message.from_user.username)+" ("+
+                                                  str(message.from_user.first_name)+str(message.from_user.last_name)+")",
                      nicname="Anonim", level=0)
 
         bot.send_message(message.chat.id, FIRST_TEXT)
@@ -179,6 +177,14 @@ def repeat_all_messages(call):
                                       message_id=call.message.message_id,
                                       text=NEW_UPLOAD,
                                       parse_mode="Markdown")
+
+            elif (cal.find("addcomment") >= 0):
+                u = Users.get(Users.tel_id == call.message.chat.id)
+                u.dstage = 11
+                u.save()
+                bot.send_message(chat_id=call.message.chat.id,
+                                 text="Пришлите ваш отзыв",
+                                 parse_mode="Markdown")
 
             elif cal.find("orderstatus") >= 0:
                 order = int(cal.split("_")[2])
@@ -294,8 +300,15 @@ def repeat_all_messages(message):
                          text=text, parse_mode="Markdown")
 
     elif message.text == BTN_13_TEXT:
-        Users.update({Users.dstage: 11}).where(Users.tel_id == message.chat.id).execute()
-        bot.send_message(message.chat.id, "Пришлите ваш отзыв")
+        text = "*Отзывы*\n\n"
+        com = Comment.select().where(Comment.verfited == True).order_by(Comment.id).execute()
+        for c in com:
+            text += "*" + c.autor + "*\n" + c.text + "\n\n"
+
+        markup = types.InlineKeyboardMarkup(row_width=1)
+        markup.add(types.InlineKeyboardButton(text="Оставить отзыв", callback_data="addcomment"))
+        bot.send_message(message.chat.id,text,reply_markup=markup,
+                          parse_mode="Markdown")
 
     elif message.text == BTN_14_TEXT:
         bot.send_message(message.chat.id, "Выбери действие", reply_markup=base_keyboard)
@@ -313,7 +326,7 @@ def repeat_all_messages(message):
 
     elif (message.text == BTN_2_TEXT):
         u = Users.get(Users.tel_id == message.chat.id)
-        n = Order.select().where(Order.userid == u.id).count()
+        n = Order.select().where(Order.userid == u.id and 0 <= Order.status < 5).count()
 
         keyboard = types.InlineKeyboardMarkup(row_width=2)
         base_button_1 = types.InlineKeyboardButton(text="Мои заказы ", callback_data="getorders")
@@ -340,10 +353,16 @@ def repeat_all_messages(message):
     else:
         u = Users.get(Users.tel_id == message.chat.id)
         if u.dstage == 11:
-            pass
-            Comment.create(autor=u.name, text=message.text)
+            Comment.create(autor=u.nicname, text=message.text)
             bot.send_message(chat_id=message.chat.id,
                              text="Отзыв добавлен")
+            u.dstage = 0
+            u.save()
+            return
+        if u.dstage == 12:
+            u.nicname = message.text
+            bot.send_message(message.chat.id, HELLO_TEXT, reply_markup=base_keyboard)
+
             u.dstage = 0
             u.save()
             return
@@ -374,7 +393,6 @@ def repeat_all_messages(message):
             bot.send_message(chat_id=message.chat.id,
                              text="Пришлите скриншот с ордером")
 
-
         u.save()
         order.save()
 
@@ -394,4 +412,5 @@ def run(debag=True):
 
 # Main Fanction
 if __name__ == '__main__':
-    run(True)
+    # bot.polling(none_stop=True)
+    run(False)

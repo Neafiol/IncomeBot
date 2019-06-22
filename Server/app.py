@@ -4,10 +4,11 @@ import telebot
 from flask import Flask, send_from_directory, request, render_template, redirect, make_response
 
 from config import order_status, tel_token, PASS
-from models import Shops, Items, Adress, Users, Order, Comment
-
 app = Flask(__name__)
 bot = telebot.TeleBot(tel_token)
+
+from models import Shops, Items, Adress, Users, Order, Comment
+
 
 
 def pass_check(function_to_decorate):
@@ -73,6 +74,9 @@ def com():
     elif comand == "upload_shop":
         Shops.update(c).where(Shops.id == c["id"]).execute()
         return "Магазин обновлен"
+    elif comand == "upload_adress":
+        Adress.update(c).where(Adress.id == c["id"]).execute()
+        return "Адрес обновлен"
 
     elif comand == "upload_user":
         Users.update(c).where(Users.id == c["id"]).execute()
@@ -95,9 +99,32 @@ def com():
 
         return "Статус заказа обновлен"
 
+    elif comand == "coment_dis":
+        c=Comment.get_by_id(int(c["id"]))
+        c.verfited=False
+        c.save()
+        return "reload"
+
+    elif comand == "coment_enb":
+        c=Comment.get_by_id(int(c["id"]))
+        c.verfited=True
+        c.save()
+        return "reload"
+
+
     elif comand == "delete_user":
-        Users.delete_by_id(c["id"])
+        Users.delete_by_id(int(c["id"]))
         return redirect("/users")
+
+    elif comand == "delete_item":
+        Items.delete_by_id(int(c["id"]))
+        return "reload"
+    elif comand == "delete_shop":
+        Shops.delete_by_id(int(c["id"]))
+        return "reload"
+    elif comand == "delete_adress":
+        Adress.delete_by_id(int(c["id"]))
+        return "reload"
 
     return "OK"
 
@@ -105,7 +132,7 @@ def com():
 @app.route('/shops')
 @pass_check
 def shops():
-    shops = Shops.select().order_by(Shops.id).execute()
+    shops = Shops.select().order_by(Shops.id.desc()).execute()
 
     return render_template('shops.html', shops=shops)
 
@@ -114,7 +141,7 @@ def shops():
 @pass_check
 def items(id=0):
     print(id)
-    items = Items.select().where(Items.shopid == id).execute()
+    items = Items.select().where(Items.shopid == id).order_by(Items.id.desc()).execute()
     shops = Shops.select().execute()
 
     return render_template('items.html', items=items, shops=shops)
@@ -123,14 +150,20 @@ def items(id=0):
 @app.route('/users')
 @pass_check
 def quizs():
-    users = Users.select().execute()
-    return render_template('users.html', users=users)
+    users = Users.select().order_by(Users.balls.desc()).execute()
+    return render_template('users.html', users=users)\
+
+@app.route('/adreses')
+@pass_check
+def adreses():
+    adreses = Adress.select().order_by(Adress.id.desc()).execute()
+    return render_template('adreses.html', adreses=adreses)
 
 
 @app.route('/coments')
 @pass_check
 def coments():
-    coments = Comment.select().execute()
+    coments = Comment.select().order_by(Comment.id.desc()).execute()
     return render_template('coments.html', coments=coments)
 
 
@@ -138,21 +171,21 @@ def coments():
 @pass_check
 def orders(type):
     if type == "all":
-        orders = Order.select().execute()
+        orders = Order.select().order_by(Order.id).execute()
     elif type == "active":
-        orders = Order.select().where(Order.id << [0, 2]).execute()
+        orders = Order.select().where(Order.status << [0, 2]).order_by(Order.id).execute()
     elif type == "way":
-        orders = Order.select().where(Order.id << [1, 4]).execute()
+        orders = Order.select().where(Order.status << [1, 4]).order_by(Order.id).execute()
     elif type == "drop":
-        orders = Order.select().where(Order.id == 3).execute()
+        orders = Order.select().where(Order.status == 3).order_by(Order.id).execute()
     elif type == "payed":
-        orders = Order.select().where(Order.id == 6).execute()
+        orders = Order.select().where(Order.status == 6).order_by(Order.id).execute()
     elif type == "received":
-        orders = Order.select().where(Order.id == 5).execute()
+        orders = Order.select().where(Order.status == 5).order_by(Order.id).execute()
     elif type == "cancle":
-        orders = Order.select().where(Order.id == 7).execute()
+        orders = Order.select().where(Order.status == 7).order_by(Order.id).execute()
     elif type == "close":
-        orders = Order.select().where(Order.id == 8).execute()
+        orders = Order.select().where(Order.status == 8).order_by(Order.id).execute()
     else:
         return "Тип сортировки не указан"
 
@@ -162,6 +195,10 @@ def orders(type):
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('static/js', path)
+
+@app.route('/img/<path:path>')
+def send_img(path):
+    return send_from_directory('static/img', path)
 
 
 @app.route('/css/<path:path>')
@@ -181,7 +218,7 @@ if __name__ == '__main__':
     при запуске на продакшен используется waitress
     '''
     if DEBUG:
-        app.run('127.0.0.1', port, debug=True)
+        app.run('127.0.0.1', port, debug=False)
     else:
         app.run('0.0.0.0', port, debug=False)
         # serve(app, host='0.0.0.0', port=port)

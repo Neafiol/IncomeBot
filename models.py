@@ -73,14 +73,15 @@ class Order(Model):
 class Comment(Model):
     autor= TextField()
     text = TextField()
+    verfited = BooleanField(default=False)
 
     class Meta:
         database = db
         db_table='Comment'
 
-Order.create_table()
-Items.create_table()
-Shops.create_table()
-Users.create_table()
-Adress.create_table()
-Comment.create_table()
+# Order.create_table()
+# Items.create_table()
+# Shops.create_table()
+# Users.create_table()
+# Adress.create_table()
+# Comment.create_table()

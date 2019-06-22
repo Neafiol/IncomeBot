@@ -94,10 +94,11 @@
 
     {% for o in orders %}
         <div class="row order">
-            <div class="card ">
+
+            <div class="card">
                 <h5 class="card-header"><a href="{{ o.url }}">{{ o.name }}</a></h5>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" >
                         <div class="card-body ">
                             <h5 class="card-title">Автор: {{ o.userid }}</h5>
                             <p>Коментарий: {{ o.other_data["comment"] }}</p>
@@ -132,7 +133,12 @@
                     <div class="col-lg-3">
                         <a target="_blank"
                            href="{{ o.other_data["photo_1"] }}">
-                            <img src="{{ o.other_data["photo_1"] }}"
+                            <img
+                                 {% if o.other_data["photo_1"]=="" %}
+                                 src="/img/unnamed.jpg"
+                                 {% else %}
+                                 src="{{ o.other_data["photo_1"] }}"
+                                 {% endif %}
                                  alt="Трэк номер"
                                  class="card-img orderphoto">
                         </a>

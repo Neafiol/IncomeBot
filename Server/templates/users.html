@@ -56,15 +56,16 @@
         <a class="nav-link " href="/coments">Coments</a>
     </li>
 </ul>
-<div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px; left: 80vw;">
+<div aria-live="polite" aria-atomic="true"
+     style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
 
     <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto">Уведомление</strong>
         </div>
         <div class="toast-body">
-            <span id="alerttext">
-            </span>
+            <p id="alerttext">
+            </p>
         </div>
     </div>
 </div>
@@ -76,8 +77,8 @@
 
             <thead>
             <tr>
-                <th class="col-lg-2 col-md-2">Сохранить</th>
                 <th class="col-lg-2 col-md-2">Удалить</th>
+                <th class="col-lg-2 col-md-2">Обновить</th>
                 <th class="col-lg-2 col-md-2">Имя</th>
                 <th class="col-lg-2 col-md-2">Ник</th>
                 <th class="col-lg-2 col-md-2">Уровень</th>

@@ -1,3 +1,9 @@
+
+.test{
+    border: #2b542c 2px solid;
+    /*width: 100px;*/
+}
+
 .auth_form{
     margin: auto;
     margin-top: 30vh;
@@ -17,6 +23,7 @@
     width: 100vw;
 }
 .order{
+    width: 100%;
     margin-top: 5vh;
     margin-left: auto;
     margin-right: auto;

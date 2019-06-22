@@ -41,13 +41,13 @@
         <a class="nav-link " href="/">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/shops">Shops</a>
+        <a class="nav-link active" href="/shops">Shops</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="/items/1">Items</a>
+        <a class="nav-link" href="/items/1">Items</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link " href="/users">Users</a>
+        <a class="nav-link" href="/users">Users</a>
     </li>
     <li class="nav-item">
         <a class="nav-link " href="/orders/all">Orders</a>
@@ -72,41 +72,25 @@
 
 <div class="container body">
     <div class="row">
-        <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Выбирите магазин
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for s in shops %}
-                    <a class="dropdown-item" href="/items/{{ s.id }}">{{ s.name }}</a>
-                {% endfor %}
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
         <table class="table">
-
             <thead>
             <tr>
-                <th class="col-lg-2">Название</th>
+                <th class="col-lg-3">Название</th>
                 <th class="col-lg-1">Удалить</th>
-                <th class="col-lg-1">Сохранить</th>
+                <th class="col-lg-1">Обновить</th>
                 <th class="col-lg-8">Инофрмация</th>
             </tr>
             </thead>
             <tbody>
-            {% for i in items %}
+            {% for a in adreses %}
 
                 <tr>
 
-                    <td><h4 class="shopname">{{ i.name }}</h4></td>
+                    <td><h4 class="shopname">{{ a.name }}</h4></td>
                     <form>
                         <td>
-                            <input type="hidden" name="cmd" value="delete_item">
-                            <input type="hidden" name="id" value="{{ i.id }}">
+                            <input type="hidden" name="cmd" value="delete_adress">
+                            <input type="hidden" name="id" value="{{ a.id }}">
                             <input type="submit" style="width: 100%" class="btn btn-danger" value="Удалить">
                         </td>
                     </form>
@@ -116,40 +100,46 @@
                         </td>
                         <td>
 
+
                             <div class="row">
-                                <div class="col-md-8">
-                                    <label for="qname">Ссылка</label>
+                                <div class="col-md-12">
+                                    <label for="qname">Полный адрес</label>
                                     <input id="qname" type="text"
-                                           value="{{ i.url }}"
+                                           value="{{ a.adress }}"
                                            placeholder="https://amazon.com"
                                            class="form-control"
-                                           name="url">
+                                           name="adress">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label>Название</label>
-                                    <input type="text" placeholder="Название" value="{{ i.name }}" name="name"
+                                    <input type="text" placeholder="Название" value="{{ a.name }}" name="name"
                                            class="form-control">
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <input type="hidden" name="cmd" value="upload_items">
-                                    <input type="hidden" name="id" value="{{ i.id }}">
+                                    <input type="hidden" name="cmd" value="upload_adress">
+                                    <input type="hidden" name="id" value="{{ a.id }}">
                                     <label>Уровень</label>
                                     <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                           value="{{ i.minlevel }}" name="minlevel">
+                                           value="{{ a.minlevel }}" name="minlevel">
                                 </div>
                                 <div class=" col-md-4">
-                                    <label>Магазин</label>
+                                    <label>Регион</label>
                                     <div class="form-group row">
-                                        <select class="form-control" value="{{ i.shopid }}" name="shopid">
-                                            {% for s in shops %}
-                                                <option class="dropdown-item"
-                                                        {% if i.shopid == s.id %}
-                                                        selected
-                                                        {% endif %}
-                                                        value="{{ s.id }}">{{ s.name }}</option>
-                                            {% endfor %}
+                                        <select class="form-control" value="{{ a.country }}" name="country">
+                                            <option class="dropdown-item"
+                                                    {% if a.country== "US" %}
+                                                    selected
+                                                    {% endif %}
+                                                    value="US">Америка
+                                            </option>
+                                            <option class="dropdown-item"
+                                                    {% if a.country== "EU" %}
+                                                    selected
+                                                    {% endif %}
+                                                    value="EU">Европа
+                                            </option>
                                         </select>
                                     </div>
                                 </div>

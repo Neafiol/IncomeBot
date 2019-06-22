@@ -27,7 +27,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-        <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/jquery-1.11.3.min.js"></script>
     {#    <script src="/js/bootstrap.min.js"></script>#}
     {#    <script src="/js/jquery.confirm.min.js"></script>#}
     {#    <script src="/js/run_prettify.js"></script>#}
@@ -56,97 +56,108 @@
         <a class="nav-link" href="/coments">Coments</a>
     </li>
 </ul>
-<div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px; left: 80vw;">
+<div aria-live="polite" aria-atomic="true"
+     style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
 
     <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
         <div class="toast-header">
             <strong class="mr-auto">Уведомление</strong>
         </div>
         <div class="toast-body">
-            <span id="alerttext">
-            </span>
+            <p id="alerttext">
+            </p>
         </div>
     </div>
 </div>
 
 <div class="container body">
     <div class="row">
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-lg-3">Название</th>
+                <th class="col-lg-1">Удалить</th>
+                <th class="col-lg-1">Обновить</th>
+                <th class="col-lg-8">Инофрмация</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for s in shops %}
+
                 <tr>
-                    <th class="col-lg-3">Название</th>
-                    <th class="col-lg-1"></th>
-                    <th class="col-lg-8">Инофрмация</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for s in shops %}
 
-                    <tr>
-                        <form>
-                            <td><h4 class="shopname">{{ s.name }}</h4></td>
-                            <td>
-                                <input type="submit" style="width: 100%" class="btn btn-primary" value="Обновить">
-                            </td>
-                            <td>
-
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <label for="qname">Ссылка</label>
-                                        <input id="qname" type="text"
-                                               value="{{ s.url }}"
-                                               placeholder="https://amazon.com"
-                                               class="form-control"
-                                               name="url">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label>Название</label>
-                                        <input type="text" placeholder="Название" value="{{ s.name }}" name="name"
-                                               class="form-control">
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <input type="hidden" name="cmd" value="upload_shop">
-                                        <input type="hidden" name="id" value="{{ s.id }}">
-                                        <label>Уровень</label>
-                                        <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                               value="{{ s.minlevel }}" name="minlevel">
-                                    </div>
-                                    <div class=" col-md-4">
-                                        <label>Регион</label>
-                                        <div class="form-group row">
-                                            <select class="form-control" value="{{ s.country }}" name="country">
-                                                <option class="dropdown-item"
-                                                        {% if s.country== "US" %}
-                                                                selected
-                                                            {% endif %}
-                                                        value="US">Америка
-                                                </option>
-                                                <option class="dropdown-item"
-                                                        {% if s.country== "EU" %}
-                                                                selected
-                                                            {% endif %}
-                                                        value="EU">Европа
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
-                        </form>
-
+                    <td><h4 class="shopname">{{ s.name }}</h4></td>
+                    <form>
+                        <td>
+                            <input type="hidden" name="cmd" value="delete_shop">
+                            <input type="hidden" name="id" value="{{ s.id }}">
+                            <input type="submit" style="width: 100%" class="btn btn-danger" value="Удалить">
                         </td>
-                    </tr>
-                {% endfor %}
+                    </form>
+                    <form>
+                        <td>
+                            <input type="submit" style="width: 100%" class="btn btn-primary" value="Обновить">
+                        </td>
+                        <td>
 
 
-                </tbody>
-            </table>
-        </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="qname">Ссылка</label>
+                                    <input id="qname" type="text"
+                                           value="{{ s.url }}"
+                                           placeholder="https://amazon.com"
+                                           class="form-control"
+                                           name="url">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Название</label>
+                                    <input type="text" placeholder="Название" value="{{ s.name }}" name="name"
+                                           class="form-control">
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <input type="hidden" name="cmd" value="upload_shop">
+                                    <input type="hidden" name="id" value="{{ s.id }}">
+                                    <label>Уровень</label>
+                                    <input type="number" placeholder="2" min="1" max="10" class="form-control"
+                                           value="{{ s.minlevel }}" name="minlevel">
+                                </div>
+                                <div class=" col-md-4">
+                                    <label>Регион</label>
+                                    <div class="form-group row">
+                                        <select class="form-control" value="{{ s.country }}" name="country">
+                                            <option class="dropdown-item"
+                                                    {% if s.country== "US" %}
+                                                    selected
+                                                    {% endif %}
+                                                    value="US">Америка
+                                            </option>
+                                            <option class="dropdown-item"
+                                                    {% if s.country== "EU" %}
+                                                    selected
+                                                    {% endif %}
+                                                    value="EU">Европа
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                    </form>
+
+                    </td>
+                </tr>
+            {% endfor %}
 
 
+            </tbody>
+        </table>
     </div>
+
+
+</div>
 </div>
 <script type="text/javascript" src="/js/index.js"></script>
 

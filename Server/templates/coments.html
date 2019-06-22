@@ -55,20 +55,44 @@
         <a class="nav-link active" href="/coments">Coments</a>
     </li>
 </ul>
+<div aria-live="polite" aria-atomic="true"
+     style="position: absolute; min-height: 200px; min-width: 80px; left: 80vw; top: 30px">
 
+    <div role="alert" id="toast" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+        <div class="toast-header">
+            <strong class="mr-auto">Уведомление</strong>
+        </div>
+        <div class="toast-body">
+            <p id="alerttext">
+            </p>
+        </div>
+    </div>
+</div>
 
 <div class="container body">
 
     {% for c in coments %}
         <div class="row coment_card">
-            <div class="col-lg-12">
-            <div class="card">
-                <h5 class="card-header">{{ c.autor }}</h5>
-                <div class="card-body ">
-                    <p><b>Коментарий:</b> {{ c.text }}</p>
+            <div class="col-lg-10">
+                <div class="card">
+                    <h5 class="card-header">{{ c.autor }}</h5>
+                    <div class="card-body ">
+                        <p><b>Коментарий:</b> {{ c.text }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div>
+                <form>
+                    <input type="hidden" name="id" value="{{ c.id }}">
+                    {% if c.verfited %}
+                        <input type="hidden" name="cmd" value="coment_dis">
+                        <input type="submit" class="btn btn-danger" value="Отключить">
+                    {% else %}
+                        <input type="hidden" name="cmd" value="coment_enb">
+                        <input type="submit" class="btn btn-success" value="Опубликовать">
+                    {% endif %}
+                </form>
+            </div>
         </div>
     {% endfor %}
     <div></div>
