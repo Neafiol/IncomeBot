@@ -27,7 +27,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-        <script src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/js/jquery-1.11.3.min.js"></script>
     {#    <script src="/js/bootstrap.min.js"></script>#}
     {#    <script src="/js/jquery.confirm.min.js"></script>#}
     {#    <script src="/js/run_prettify.js"></script>#}
@@ -75,170 +75,190 @@
 </div>
 <div class="container body">
     <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th class="col-lg-3">Description</th>
-                    <th class="col-lg-1">Action</th>
-                    <th class="col-lg-8">Input</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <form>
-                        <td><h4>Отправить всем сообщение</h4></td>
-                        <td>
-                            <input type="submit" style="width: 100%" class="btn btn-primary" value="Отправить">
-                        </td>
-                        <td>
-                            <input type="hidden" name="cmd" value="send_mes">
-                            <textarea style="width: 100%" class="form-control" name="message"></textarea>
-                        </td>
-                    </form>
-                </tr>
-
-                <tr>
-                    <form>
-                        <td><h4>Добавить магазин</h4></td>
-                        <td>
-                            <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
-                        </td>
-                        <td>
-
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label for="qname">Ссылка</label>
-                                    <input id="qname" type="text" placeholder="https://amazon.com" class="form-control"
-                                           name="url">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label>Название</label>
-                                    <input type="text" placeholder="Название" name="name" class="form-control">
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <input type="hidden" name="cmd" value="new_shop">
-                                    <label>Уровень</label>
-                                    <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                           name="minlevel">
-                                </div>
-                                <div class=" col-md-4">
-                                    <label>Регион</label>
-                                    <div class="form-group row">
-                                        <select class="form-control" name="country">
-                                            <option class="dropdown-item"
-                                                    value="US">Америка
-                                            </option>
-                                            <option class="dropdown-item"
-                                                    value="EU">Европа
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                    </form>
-
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-lg-3">Description</th>
+                <th class="col-lg-1">Action</th>
+                <th class="col-lg-8">Input</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <form>
+                    <td><h4>Отправить всем сообщение</h4></td>
+                    <td>
+                        <input type="submit" style="width: 100%" class="btn btn-primary" value="Отправить">
                     </td>
-                </tr>
-                <tr>
-                    <form>
-                        <td><h4>Добавить товар</h4></td>
-                        <td>
-                            <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
-                        </td>
-                        <td>
-
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label for="qname">Ссылка</label>
-                                    <input id="qname" type="text" placeholder="https://amazon.com" class="form-control"
-                                           name="url">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label>Название</label>
-                                    <input type="text" placeholder="Название" name="name" class="form-control">
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <input type="hidden" name="cmd" value="new_item">
-                                    <label>Уровень</label>
-                                    <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                           name="minlevel">
-                                </div>
-                                <div class=" col-md-4">
-                                    <label>Магазин</label>
-                                    <div class="form-group row">
-                                        <select class="form-control" name="shopid">
-                                            {% for s in shops %}
-                                                <option class="dropdown-item"
-                                                        value="{{ s.id }}">{{ s.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                    </form>
-
+                    <td>
+                        <input type="hidden" name="cmd" value="send_mes">
+                        <textarea style="width: 100%" class="form-control" name="message"></textarea>
                     </td>
-                </tr>
-                <tr>
-                    <form>
-                        <td><h4>Добавить адресс</h4></td>
-                        <td>
-                            <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
-                        </td>
-                        <td>
+                </form>
+            </tr>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label>Полный адресс</label>
-                                    <input type="text" name="adress"
-                                           placeholder="Steven Bernson, Attorney at Law 1556 Broadway, suite 416 New York, NY, 10120, USA"
-                                           class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label>Название</label>
-                                    <input type="text" placeholder="Дроп США" name="name" class="form-control">
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <input type="hidden" name="cmd" value="new_adress">
-                                    <label>Уровень</label>
-                                    <input type="number" placeholder="2" min="1" max="10" class="form-control"
-                                           name="minlevel">
-                                </div>
-                                <div class=" col-md-4">
-                                    <label>Регион</label>
-                                    <div class="form-group row">
-                                        <select class="form-control" name="country">
-                                            <option class="dropdown-item"
-                                                    value="US">Америка
-                                            </option>
-                                            <option class="dropdown-item"
-                                                    value="EU">Европа
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                    </form>
-
+            <tr>
+                <form>
+                    <td><h4>Добавить магазин</h4></td>
+                    <td>
+                        <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
                     </td>
-                </tr>
+                    <td>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="qname">Ссылка</label>
+                                <input id="qname" type="text" placeholder="https://amazon.com" class="form-control"
+                                       name="url">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label>Название</label>
+                                <input type="text" placeholder="Название" name="name" class="form-control">
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <input type="hidden" name="cmd" value="new_shop">
+                                <label>Уровень</label>
+                                <input type="number" placeholder="2" min="1" max="10" class="form-control"
+                                       name="minlevel">
+                            </div>
+                            <div class=" col-md-4">
+                                <label>Регион</label>
+                                <div class="form-group row">
+                                    <select class="form-control" name="country">
+                                        <option class="dropdown-item"
+                                                value="US">Америка
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="EU">Европа
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                </form>
+
+                </td>
+            </tr>
+            <tr>
+                <form>
+                    <td><h4>Добавить товар</h4></td>
+                    <td>
+                        <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
+                    </td>
+                    <td>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="qname">Ссылка</label>
+                                <input id="qname" type="text" placeholder="https://amazon.com" class="form-control"
+                                       name="url">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label>Название</label>
+                                <input type="text" placeholder="Название" name="name" class="form-control">
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <input type="hidden" name="cmd" value="new_item">
+                                <label>Уровень</label>
+                                <input type="number" placeholder="2" min="1" max="10" class="form-control"
+                                       name="minlevel">
+                            </div>
+                            <div class=" col-md-4">
+                                <label>Магазин</label>
+                                <div class="form-group row">
+                                    <select class="form-control" name="shopid">
+                                        {% for s in shops %}
+                                            <option class="dropdown-item"
+                                                    value="{{ s.id }}">{{ s.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                </form>
+
+                </td>
+            </tr>
+            <tr>
+                <form>
+                    <td><h4>Добавить адресс</h4></td>
+                    <td>
+                        <input type="submit" style="width: 100%" class="btn btn-primary" value="Добавить">
+                    </td>
+                    <td>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Полный адресс</label>
+                                <input type="text" name="adress"
+                                       placeholder="Steven Bernson, Attorney at Law 1556 Broadway, suite 416 New York, NY, 10120, USA"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label>Название</label>
+                                <input type="text" placeholder="Дроп США" name="name" class="form-control">
+                            </div>
+                            <div class="col-md-2 mb-3">
+                                <input type="hidden" name="cmd" value="new_adress">
+                                <label>Уровень</label>
+                                <input type="number" placeholder="2" min="1" max="10" class="form-control"
+                                       name="minlevel">
+                            </div>
+                            <div class=" col-md-4">
+                                <label>Регион</label>
+                                <div class="form-group row">
+                                    <select class="form-control" name="country">
+                                        <option class="dropdown-item"
+                                                value="US">Америка
+                                        </option>
+                                        <option class="dropdown-item"
+                                                value="EU">Европа
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                </form>
+
+                </td>
+            <tr>
+                <form>
+                    <td><h4 style="color: red">Экстренное форматирование</h4></td>
+                    <td>
+                        <input type="submit" style="width: 100%" class="btn btn-danger" value="Форматировать">
+                        <input type="hidden" name="cmd" value="delete_all">
+                    </td>
+                    <td>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Пароль администратора</label>
+                                <input type="text" name="pass"
+                                       placeholder="1234"
+                                       class="form-control">
+                            </div>
+                        </div>
+                </form>
+
+                </td>
+            </tr>
 
 
-                </tbody>
-            </table>
-        </div>
-
-
+            </tbody>
+        </table>
     </div>
+
+
+</div>
 </div>
 <script type="text/javascript" src="/js/index.js"></script>
 

