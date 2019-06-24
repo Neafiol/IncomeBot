@@ -36,13 +36,18 @@ base_button_4 = types.KeyboardButton(text=BTN_14_TEXT)
 base_keyboard1.add(base_button_1, base_button_2, base_button_3, base_button_4)
 
 
+def alarm(text):
+    requests.get(f"https://alarmerbot.ru/?key={ALAMER_KEY}&message= " + text)
+
+
 @bot.message_handler(content_types=['photo'])
 def handle_docs_photo(message):
     u = Users.get(Users.tel_id == message.chat.id)
-    if u.dstage == 0:
+    if u.dstage not in [6, 8]:
         bot.send_message(chat_id=message.chat.id,
                          text=I_NOT_RESPONSE)
         return
+
     file_info = bot.get_file(message.photo[len(message.photo) - 1].file_id)
 
     downloaded_file = bot.download_file(file_info.file_path)
@@ -62,6 +67,7 @@ def handle_docs_photo(message):
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
                          text=INFO_UPLOAD)
+        alarm("В заказе: " + order.name + " обновлен статус")
     elif u.dstage == 6:
         order = Order.get_by_id(u.active_order)
         order.other_data["photo_1"] = url
@@ -70,6 +76,7 @@ def handle_docs_photo(message):
         u.dstage = 0
         bot.send_message(chat_id=message.chat.id,
                          text=INFO_UPLOAD)
+        alarm("В заказе: " + order.name + " обновлен статус")
     else:
         bot.send_message(chat_id=message.chat.id,
                          text="Фото не ожидалось")
@@ -83,16 +90,17 @@ def repeat_all_messages(message):
     u.level = 1
     u.save()
     bot.send_message(message.chat.id, SEND_NICNAME)
+    alarm(u.name + " авторизировался в боте")
 
 
 # Start Fanction
 @bot.message_handler(commands=['start'])
-def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
-
+def startf(message):
     u = Users.get_or_none(Users.tel_id == message.chat.id)
     if u == None:
-        Users.create(tel_id=message.chat.id, name=str(message.from_user.username)+" ("+
-                                                  str(message.from_user.first_name)+str(message.from_user.last_name)+")",
+        Users.create(tel_id=message.chat.id, name=str(message.from_user.username) + " (" +
+                                                  str(message.from_user.first_name) + str(
+            message.from_user.last_name) + ")",
                      nicname="Anonim", level=0)
 
         bot.send_message(message.chat.id, FIRST_TEXT)
@@ -102,7 +110,7 @@ def repeat_all_messages(message):  # Название функции не игр
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def repeat_all_messages(call):
+def callback(call):
     if call.from_user:
         cal = str(call.data)
         try:
@@ -177,6 +185,7 @@ def repeat_all_messages(call):
                                       message_id=call.message.message_id,
                                       text=NEW_UPLOAD,
                                       parse_mode="Markdown")
+                alarm("Создан новый заказ")
 
             elif (cal.find("addcomment") >= 0):
                 u = Users.get(Users.tel_id == call.message.chat.id)
@@ -307,8 +316,8 @@ def repeat_all_messages(message):
 
         markup = types.InlineKeyboardMarkup(row_width=1)
         markup.add(types.InlineKeyboardButton(text="Оставить отзыв", callback_data="addcomment"))
-        bot.send_message(message.chat.id,text,reply_markup=markup,
-                          parse_mode="Markdown")
+        bot.send_message(message.chat.id, text, reply_markup=markup,
+                         parse_mode="Markdown")
 
     elif message.text == BTN_14_TEXT:
         bot.send_message(message.chat.id, "Выбери действие", reply_markup=base_keyboard)
@@ -358,6 +367,8 @@ def repeat_all_messages(message):
                              text="Отзыв добавлен")
             u.dstage = 0
             u.save()
+            alarm("Добавлен новый отзыв: " + message.text)
+
             return
         if u.dstage == 12:
             u.nicname = message.text
@@ -377,6 +388,8 @@ def repeat_all_messages(message):
             u.dstage = 0
             bot.send_message(chat_id=message.chat.id,
                              text=WAIT_MODERATOR)
+            alarm("У заказа " + order.name + " указаны данные дропа")
+
         elif u.dstage == 3:
             order.name = message.text
             u.dstage = 4
@@ -406,6 +419,8 @@ def run(debag=True):
             bot.polling(none_stop=True)
         except:
             print("Error")
+            alarm("Произошла критическая ошибка, для восстановления работы бота обратитесь к создателю."
+                  " Трасировка ошибок доступна в файле samle.log")
             if (debag):
                 exit(0)
 
