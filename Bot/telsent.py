@@ -121,7 +121,7 @@ def callback(call):
                 markup = types.InlineKeyboardMarkup(row_width=1)
                 buttons = []
 
-                shops = Shops.select().where(Shops.country == country and Shops.minlevel <= level).execute()
+                shops = Shops.select().where((Shops.country == country) & (Shops.minlevel <= level)).execute()
 
                 for s in shops:
                     buttons.append(types.InlineKeyboardButton(text=s.name, callback_data="shop_" + str(s.id)))
@@ -238,7 +238,7 @@ def callback(call):
                 markup = types.InlineKeyboardMarkup(row_width=1)
                 buttons = []
                 u = Users.get(Users.tel_id == call.message.chat.id)
-                orders = Order.select().where(Order.userid == u.id and Order.status >= 0 and Order.status < 5).execute()
+                orders = Order.select().where((Order.userid == u.id) & (0 <= Order.status < 5)).execute()
 
                 for o in orders:
                     buttons.append(types.InlineKeyboardButton(text=o.name, callback_data="order_" + str(o.id)))
@@ -302,8 +302,7 @@ def repeat_all_messages(message):
         users = Users.select().order_by(Users.balls.desc()).limit(20).execute()
 
         for i, u in enumerate(users):
-            spase = 45 - len(str(u.balls)) - len(str(u.nicname)) - len(str(i))
-            text += "*" + str(i + 1) + "*. " + str(u.nicname) + " " * spase + "_" + str(u.balls) + "_\n"
+            text += "*" + str(i + 1) + "*. " + str(u.nicname) + " *(" + str(u.balls) + ")*\n"
 
         bot.send_message(chat_id=message.chat.id,
                          text=text, parse_mode="Markdown")
@@ -335,7 +334,7 @@ def repeat_all_messages(message):
 
     elif (message.text == BTN_2_TEXT):
         u = Users.get(Users.tel_id == message.chat.id)
-        n = Order.select().where(Order.userid == u.id and 0 <= Order.status < 5).count()
+        n = Order.select().where((Order.userid == u.id) & (0 <= Order.status < 5)).count()
 
         keyboard = types.InlineKeyboardMarkup(row_width=2)
         base_button_1 = types.InlineKeyboardButton(text="Мои заказы ", callback_data="getorders")
@@ -382,6 +381,10 @@ def repeat_all_messages(message):
             bot.send_message(chat_id=message.chat.id,
                              text="Я не отвечаю на сообщения")
 
+        if (u.active_order == 0):
+            bot.send_message(chat_id=message.chat.id,
+                             text="Я не отвечаю на сообщения")
+            return
         order = Order.get_by_id(u.active_order)
         if u.dstage == 9:
             order.other_data["dropinfo_1"] = message.text
@@ -422,10 +425,11 @@ def run(debag=True):
             alarm("Произошла критическая ошибка, для восстановления работы бота обратитесь к создателю."
                   " Трасировка ошибок доступна в файле samle.log")
             if (debag):
-                exit(0)
+                exit(-1)
 
 
 # Main Fanction
+
 if __name__ == '__main__':
     # bot.polling(none_stop=True)
-    run(False)
+    run(True)
