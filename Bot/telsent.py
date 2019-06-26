@@ -291,6 +291,11 @@ def callback(call):
 @bot.message_handler(content_types=["text"])
 # обработка ответа от участника
 def repeat_all_messages(message):
+    u = Users.get_or_none(Users.tel_id == message.chat.id)
+    if(u==None):
+        bot.send_message(message.chat.id, "Вначале пройдите авторизацию")
+        return
+
     if message.text == BTN_1_TEXT:
         bot.send_message(message.chat.id, O_SERVICE_TEXT, reply_markup=base_keyboard1)
 
@@ -302,7 +307,8 @@ def repeat_all_messages(message):
         users = Users.select().order_by(Users.balls.desc()).limit(20).execute()
 
         for i, u in enumerate(users):
-            text += "*" + str(i + 1) + "*. " + str(u.nicname) + " *(" + str(u.balls) + ")*\n"
+            nic = str(u.nicname).replace("_", "").replace("*", "").replace("[", "").replace("`", "").replace("]", "")
+            text += "*" + str(i + 1) + "*. " + nic + " *(" + str(u.balls) + ")*\n"
 
         bot.send_message(chat_id=message.chat.id,
                          text=text, parse_mode="Markdown")
@@ -322,18 +328,17 @@ def repeat_all_messages(message):
         bot.send_message(message.chat.id, "Выбери действие", reply_markup=base_keyboard)
 
     elif (message.text == BTN_3_TEXT):
+
         markup = types.InlineKeyboardMarkup(row_width=3)
         buttons = []
         for c in COUNTRIES:
             buttons.append(types.InlineKeyboardButton(text=c, callback_data="country_" + COUNTRIES[c]))
         markup.add(*buttons)
-        u = Users.get_or_none(Users.tel_id == message.chat.id)
         u.dstage = message.message_id + 1
         u.save()
         bot.send_message(message.chat.id, "Выберете страну", reply_markup=markup)
 
     elif (message.text == BTN_2_TEXT):
-        u = Users.get(Users.tel_id == message.chat.id)
         n = Order.select().where((Order.userid == u.id) & (0 <= Order.status < 5)).count()
 
         keyboard = types.InlineKeyboardMarkup(row_width=2)
@@ -346,7 +351,6 @@ def repeat_all_messages(message):
 
     elif message.text == BTN_4_TEXT:
         text = "*Доступные Вам адреса:*\n\n"
-        u = Users.get(Users.tel_id == message.chat.id)
         adreses = Adress.select().where(Adress.minlevel <= u.level).execute()
 
         for i, a in enumerate(adreses):
@@ -356,10 +360,7 @@ def repeat_all_messages(message):
                          text=text, parse_mode="Markdown")
 
 
-
-
     else:
-        u = Users.get(Users.tel_id == message.chat.id)
         if u.dstage == 11:
             Comment.create(autor=u.nicname, text=message.text)
             bot.send_message(chat_id=message.chat.id,
