@@ -17,7 +17,7 @@ pyAesCrypt==0.4.3
 pycparser==2.19
 pycryptodomex==3.8.2
 pyTelegramBotAPI==3.6.6
-PyYAML==5.1.1
+PyYAML==5.4
 requests==2.7.0
 shellescape==3.4.1
 six==1.12.0
